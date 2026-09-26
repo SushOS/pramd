@@ -1,0 +1,645 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>PraMD — Indic-Language Conditioning of a Frozen Humanoid Motion Diffusion Model</title>
+<meta name="description" content="A 4.7M-parameter adapter conditions a frozen, English-only humanoid motion diffusion generator on Hindi, Bengali, Tamil and Telugu, with no translation at inference.">
+
+<meta name="pramd-gradio" content="https://codesushh-pramd-demo.hf.space">
+<script type="importmap">{"imports":{
+  "three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/",
+  "three/examples/jsm/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/",
+  "urdf-loader":"https://cdn.jsdelivr.net/npm/urdf-loader@0.12.6/src/URDFLoader.js"
+}}</script>
+<script type="module" src="live/live.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css">
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"></script>
+
+<style>
+:root{
+  --bg:#fdfdfc; --ink:#17191b; --ink2:#474d53; --ink3:#868d94;
+  --rule:#e5e7e9; --rule2:#f0f1f3;
+  --accent:#1f4e79; --neg:#8f3b3b;
+  --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,"Book Antiqua",Georgia,serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:56px;color-scheme:light}
+body{background:var(--bg);color:var(--ink);font-size:17px;line-height:1.7;
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing:antialiased;font-variant-numeric:tabular-nums}
+::selection{background:#dde7ef}
+.w{max-width:1160px;margin:0 auto;padding:0 40px}
+
+nav{position:sticky;top:0;z-index:50;background:rgba(253,253,252,.93);
+  backdrop-filter:blur(10px);border-bottom:1px solid var(--rule)}
+nav .w{display:flex;align-items:center;gap:2px;height:50px;overflow-x:auto;scrollbar-width:none}
+nav .w::-webkit-scrollbar{display:none}
+nav b{margin-right:auto;font-size:15px;font-weight:660;white-space:nowrap}
+nav a{color:var(--ink3);text-decoration:none;font-size:13.5px;padding:5px 9px;white-space:nowrap}
+nav a:hover{color:var(--ink)}
+
+header{padding:72px 0 44px}
+.stats{display:flex;flex-wrap:wrap;gap:0;margin-top:34px;padding-top:22px;
+  border-top:1px solid var(--rule);font-size:14.5px;color:var(--ink3)}
+.stats span{padding:0 22px;border-left:1px solid var(--rule);line-height:1.4}
+.stats span:first-child{padding-left:0;border-left:0}
+.stats b{display:block;font-family:var(--serif);font-size:22px;font-weight:600;
+  color:var(--ink);letter-spacing:-.015em;margin-bottom:1px}
+h1{font-family:var(--serif);font-size:46px;font-weight:600;letter-spacing:-.02em;
+  line-height:1.16;margin-bottom:22px;max-width:880px}
+.sub{font-size:19px;color:var(--ink2);max-width:780px;margin-bottom:24px}
+.sub b{color:var(--ink);font-weight:620}
+.byline{font-size:14.5px;color:var(--ink3);margin-bottom:20px}
+.links{display:flex;flex-wrap:wrap;gap:0 22px;font-size:15.5px}
+.links a{color:var(--accent);text-decoration:none;border-bottom:1px solid transparent;padding:2px 0}
+.links a:hover{border-bottom-color:var(--accent)}
+
+section{padding:46px 0;border-top:1px solid var(--rule)}
+section#demo{border-top:0;padding-top:8px}
+.sn{font-size:11.5px;letter-spacing:.11em;text-transform:uppercase;color:var(--ink3);
+  font-family:var(--mono);margin-bottom:13px;padding-top:3px;display:inline-block;
+  border-top:2px solid var(--ink);padding-top:10px}
+h2{font-family:var(--serif);font-size:30px;font-weight:600;letter-spacing:-.015em;
+  line-height:1.25;margin-bottom:18px;max-width:820px}
+h3{font-family:var(--serif);font-size:19.5px;font-weight:600;margin:34px 0 9px;letter-spacing:-.008em}
+p{margin-bottom:16px;color:var(--ink2);max-width:820px}
+p b,li b,td b{color:var(--ink);font-weight:620}
+a.ln{color:var(--accent);text-decoration:none;border-bottom:1px solid rgba(31,78,121,.28)}
+a.ln:hover{border-bottom-color:var(--accent)}
+.tt{font-family:var(--mono);font-size:.87em;color:var(--ink)}
+ul{margin:14px 0 18px 0;list-style:none;max-width:820px}
+ul li{padding-left:19px;position:relative;margin-bottom:9px;color:var(--ink2)}
+ul li:before{content:"—";position:absolute;left:0;color:var(--ink3)}
+
+.eq{margin:22px 0;overflow-x:auto;overflow-y:hidden;padding:2px 0}
+.eqn{font-size:14px;color:var(--ink3);margin:-10px 0 20px;max-width:820px}
+
+.tw{overflow-x:auto;margin:22px 0}
+table{width:100%;border-collapse:collapse;font-size:14.5px;min-width:460px}
+caption{caption-side:bottom;text-align:left;font-size:13px;color:var(--ink3);
+  padding-top:11px;line-height:1.55;max-width:800px}
+th{text-align:left;font-size:11px;letter-spacing:.07em;text-transform:uppercase;
+  color:var(--ink2);font-weight:680;padding:0 14px 9px 0;border-bottom:1.5px solid var(--ink);white-space:nowrap}
+td{padding:9px 14px 9px 0;border-bottom:1px solid var(--rule2);color:var(--ink2)}
+tbody tr:hover td{background:#f6f7f5}
+tr:last-child td{border-bottom:1px solid var(--rule)}
+td.k{color:var(--ink);font-weight:555}
+th.n,td.n{text-align:right;font-family:var(--mono);font-size:13.5px;white-space:nowrap}
+tr.sec td{padding-top:17px;font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;
+  color:var(--ink3);font-weight:650;border-bottom:1px solid var(--rule)}
+.best{color:var(--ink);font-weight:655}
+.bad{color:var(--neg)} .mut{color:var(--ink3)}
+
+figure{margin:24px 0}
+video{width:100%;display:block;background:#101214;border:1px solid var(--rule);border-radius:2px}
+figcaption{font-size:13.5px;color:var(--ink3);margin-top:12px;line-height:1.6;max-width:800px;
+  padding-left:13px;border-left:2px solid var(--rule)}
+figcaption b{color:var(--ink2);font-weight:620}
+.dia{margin:24px 0;overflow-x:auto}
+
+.tabs{display:flex;gap:0;border-bottom:1px solid var(--rule);margin:26px 0 2px;flex-wrap:wrap}
+.tabs button{background:none;border:0;border-bottom:2px solid transparent;padding:9px 16px 9px 0;
+  margin-right:18px;font:inherit;font-size:15px;color:var(--ink3);cursor:pointer;margin-bottom:-1px}
+.tabs button:hover{color:var(--ink)}
+.tabs button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--ink);font-weight:620}
+.clip{padding:24px 0;border-bottom:1px solid var(--rule2)}
+.clip:last-child{border-bottom:0}
+.ch{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:5px;flex-wrap:wrap}
+.ch .t{font-size:16px;font-weight:600;color:var(--ink);max-width:760px;line-height:1.45}
+.ch .m{font-family:var(--mono);font-size:12.5px;color:var(--ink3);white-space:nowrap}
+.cap{font-size:14.5px;color:var(--ink2);margin-bottom:13px}
+.cap .x{display:block;color:var(--ink3)}
+.mrow{font-size:13px;color:var(--ink3);margin-top:10px;font-family:var(--mono)}
+.win{color:var(--ink);font-weight:620}
+
+.live{margin:26px 0 8px}
+#live-view{position:relative;width:100%;aspect-ratio:16/8;background:#141618;border:1px solid var(--rule);
+  border-radius:2px;overflow:hidden;box-shadow:0 1px 2px rgba(20,25,30,.04),0 10px 30px rgba(20,25,30,.06)}
+#live-view canvas{display:block;width:100%;height:100%;cursor:grab}
+#live-view:not(.ready)::after{content:"Loading the Unitree G1 model";position:absolute;inset:0;display:grid;
+  place-items:center;color:#8a9098;font-size:14px;letter-spacing:.02em}
+.live-bar{display:flex;align-items:center;gap:14px;padding:10px 0 12px;border-bottom:1px solid var(--rule)}
+.live-bar button{background:none;border:1px solid #cfd4d9;border-radius:3px;padding:5px 14px;font:inherit;
+  font-size:13.5px;color:var(--ink);cursor:pointer;min-width:68px}
+.live-bar button:disabled{color:var(--ink3);cursor:default}
+#live-scrub{flex:1;accent-color:#17191b}
+#live-clock{font-family:var(--mono);font-size:12.5px;color:var(--ink3);min-width:96px;text-align:right}
+.live-input{margin-top:18px}
+#live-text{width:100%;min-height:96px;resize:vertical;font:inherit;font-size:17.5px;line-height:1.55;
+  padding:14px 16px;border:1px solid #cfd4d9;border-radius:3px;background:#fff;color:var(--ink)}
+#live-text:focus{outline:none;border-color:var(--ink);box-shadow:0 0 0 3px rgba(23,25,27,.06)}
+.live-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px;margin-top:12px}
+.ex{margin-top:16px;border-top:1px solid var(--rule)}
+.ex-head{display:flex;align-items:baseline;gap:6px 18px;flex-wrap:wrap;padding-top:10px}
+.ex-label{font-size:11.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink3);font-family:var(--mono)}
+.ex-tabs{display:flex;flex-wrap:wrap}
+.ex-tabs button{background:none;border:0;border-bottom:2px solid transparent;padding:6px 11px;font:inherit;
+  font-size:14px;color:var(--ink3);cursor:pointer}
+.ex-tabs button:hover{color:var(--ink)}
+.ex-tabs button[aria-selected=true]{color:var(--ink);border-bottom-color:var(--ink);font-weight:600}
+ul.ex-list{list-style:none;margin:4px 0 0;max-width:none;columns:2;column-gap:36px}
+ul.ex-list li{break-inside:avoid;padding:0;margin:0}
+ul.ex-list li:before{content:none}
+.ex-list button{display:block;width:100%;text-align:left;background:none;border:0;
+  border-bottom:1px solid var(--rule2);padding:9px 2px;font:inherit;cursor:pointer;color:var(--ink)}
+.ex-list button:hover .t{color:var(--accent)}
+.ex-list .t{display:block;font-size:15.5px;line-height:1.45}
+.ex-list .g{display:block;font-size:12.5px;color:var(--ink3);margin-top:1px}
+.ex-note{font-size:12.5px;color:var(--ink3);margin:10px 0 0}
+@media(max-width:760px){ul.ex-list{columns:1}}
+.seg{display:inline-flex;border:1px solid #cfd4d9;border-radius:3px;overflow:hidden}
+.seg button{background:#fff;border:0;padding:7px 13px;font:inherit;font-size:13.5px;color:var(--ink2);cursor:pointer}
+.seg button+button{border-left:1px solid #cfd4d9}
+.seg button[aria-pressed=true]{background:#17191b;color:#fff}
+.live-row label{font-size:14px;color:var(--ink3)}
+#live-dur{font:inherit;font-size:14px;padding:6px 8px;border:1px solid #cfd4d9;border-radius:3px;
+  background:#fff;color:var(--ink);margin-left:6px}
+#live-go{margin-left:auto;background:#17191b;color:#fff;border:0;border-radius:3px;padding:10px 24px;
+  font:inherit;font-size:15px;font-weight:600;cursor:pointer}
+#live-go:hover:not(:disabled){background:#000}
+#live-go:disabled{background:#a3a9af;cursor:not-allowed}
+#live-status{font-size:14px;color:var(--ink3);margin-top:14px}
+#live-status[data-kind=err],#live-status[data-kind=off]{color:var(--neg)}
+#live-meta{font-size:13px;color:var(--ink2);font-family:var(--mono);margin-top:3px;min-height:1.4em}
+iframe.demo{width:100%;height:720px;border:1px solid var(--rule);display:block;
+  background:#fff;margin:24px 0 14px;border-radius:2px;
+  box-shadow:0 1px 2px rgba(20,25,30,.04),0 10px 30px rgba(20,25,30,.05)}
+
+.cite{font-family:var(--mono);font-size:13px;line-height:1.8;color:var(--ink2);
+  white-space:pre;overflow-x:auto;border-top:1px solid var(--rule);
+  border-bottom:1px solid var(--rule);padding:16px 0;margin:16px 0}
+footer{padding:30px 0 66px;font-size:13.5px;color:var(--ink3);border-top:1px solid var(--rule)}
+footer p{color:var(--ink3);max-width:820px}
+
+@media(max-width:1080px){
+  .w{max-width:900px;padding:0 32px}
+  h1{font-size:38px}h2{font-size:26px}
+  iframe.demo{height:600px}
+}
+@media(max-width:760px){
+  body{font-size:16.5px}
+  .w{padding:0 22px}
+  h1{font-size:27px}h2{font-size:21px}.sub{font-size:16.5px}
+  iframe.demo{height:460px}
+  .stats span{padding:0 16px}
+  .stats b{font-size:19px}
+}
+</style></head><body>
+
+<nav><div class="w">
+  <b>PraMD</b>
+  <a href="#demo">Demo</a><a href="#problem">Problem</a><a href="#method">Method</a>
+  <a href="#results">Results</a><a href="#renders">Renders</a><a href="#code">Code</a>
+</div></nav>
+
+<header><div class="w">
+  <h1>Indic-Language Conditioning of a Frozen Humanoid Motion Diffusion Model</h1>
+  <p class="sub">A <b>4.7M-parameter adapter</b> — 3.9% of the denoiser it steers — conditions a
+  completely frozen, English-only humanoid motion generator on <b>Hindi, Bengali, Tamil and
+  Telugu</b>, with no translation at inference.</p>
+  <div class="byline">Anonymous Submission &nbsp;·&nbsp; ICRA 2027, under review</div>
+  <div class="links">
+    <a href="#code">Paper</a>
+    <a href="https://github.com/SushOS/IndicVLA/tree/run3-results">Code</a>
+    <a href="https://huggingface.co/datasets/CodeSushh/maila-run3-motionpivot/tree/main">Artifacts</a>
+    <a href="#renders">Renders</a>
+    <a href="#demo">Demo</a>
+  </div>
+
+  <div class="stats">
+    <span><b>4,725,505</b> trainable parameters</span>
+    <span><b>3.9%</b> of the denoiser</span>
+    <span><b>4</b> languages, one adapter</span>
+    <span><b>7.8 h</b> on one GPU</span>
+  </div>
+</div></header>
+
+<section id="demo"><div class="w">
+  <div class="sn">01 — Try it</div>
+  <h2>Type an instruction in any of four languages</h2>
+  <p>This is the frozen OMG generator with our adapter, running live. Write or paste an instruction in
+  Hindi, Bengali, Tamil, Telugu or English; the motion is generated from scratch and played back on the
+  Unitree G1. Switch to stock OMG to see the same instruction without the adapter.</p>
+
+  <div class="live">
+    <div id="live-view" aria-label="Generated motion"></div>
+    <div class="live-bar">
+      <button type="button" id="live-play" disabled>Play</button>
+      <input type="range" id="live-scrub" min="0" max="0" value="0" disabled aria-label="Scrub through the motion">
+      <span id="live-clock">0.0 / 0.0 s</span>
+    </div>
+
+    <div class="live-input">
+      <textarea id="live-text" rows="3" aria-label="Instruction"
+        placeholder="एक व्यक्ति आगे चलता है और फिर पीछे मुड़ जाता है।"></textarea>
+      <div class="ex">
+        <div class="ex-head">
+          <span class="ex-label">Examples</span>
+          <div class="ex-tabs" id="live-ex-tabs" role="tablist" aria-label="Example language"></div>
+        </div>
+        <ul class="ex-list" id="live-examples"></ul>
+        <p class="ex-note" id="live-ex-note"></p>
+      </div>
+      <div class="live-row">
+        <div class="seg" id="live-mode" role="group" aria-label="Model">
+          <button type="button" data-mode="pramd" aria-pressed="true">PraMD adapter</button>
+          <button type="button" data-mode="stock" aria-pressed="false">Stock OMG</button>
+        </div>
+        <label>Length
+          <select id="live-dur">
+            <option value="4">4 s</option><option value="6" selected>6 s</option>
+            <option value="8">8 s</option><option value="10">10 s</option>
+          </select>
+        </label>
+        <button type="button" id="live-go" disabled>Generate motion</button>
+      </div>
+      <div id="live-status">Connecting to the model…</div>
+      <div id="live-meta"></div>
+    </div>
+  </div>
+  <script>
+    if (location.protocol === 'file:') {
+      document.getElementById('live-status').textContent =
+        'Open this page from its website address to use the live model.';
+      document.getElementById('live-status').dataset.kind = 'off';
+    }
+  </script>
+
+  <h3>Browse precomputed examples</h3>
+  <iframe class="demo" src="https://pragyavla.vercel.app/" title="PragyaVLA interactive explorer"
+    referrerpolicy="no-referrer"
+    sandbox="allow-scripts allow-same-origin allow-popups allow-forms"></iframe>
+  <p class="mut" style="font-size:14px">If the frame does not load, open
+  <a class="ln" href="https://pragyavla.vercel.app/">pragyavla.vercel.app</a> directly.</p>
+</div></section>
+
+<section id="problem"><div class="w">
+  <div class="sn">02 — The problem</div>
+  <h2>Outside English the failure is representational, not gradual</h2>
+
+  <p>T5, the frozen text interface of the OMG backbone, maps Devanagari to unknown tokens at 43.6%.
+  Measured on 1,000 distinct real captions per language, distinct sentences collapse onto shared
+  token sequences — and identical token ids give identical hidden states and identical embeddings.
+  Two different Hindi sentences can reach the generator as byte-identical input.</p>
+
+  <div class="tw"><table>
+    <caption>Tokenizer collapse in the frozen text tower, measured on 1,000 distinct real captions
+    per language.</caption>
+    <tr><th>Language</th><th class="n">Distinct captions</th><th class="n">Distinct token sequences</th>
+        <th class="n">Unknown tokens</th></tr>
+    <tr><td class="k">English</td><td class="n">1,000</td><td class="n best">1,000</td><td class="n">0.0%</td></tr>
+    <tr><td class="k">Hindi</td><td class="n">1,000</td><td class="n bad">392</td><td class="n">43.6%</td></tr>
+    <tr><td class="k">Bengali</td><td class="n">1,000</td><td class="n bad">260</td><td class="n">42.4%</td></tr>
+    <tr><td class="k">Tamil</td><td class="n">1,000</td><td class="n bad">209</td><td class="n">41.1%</td></tr>
+    <tr><td class="k">Telugu</td><td class="n">1,000</td><td class="n bad">216</td><td class="n">41.6%</td></tr>
+  </table></div>
+
+  <p>Retrieval falls from R@1 <b>0.317</b> in English to <b>0.133</b>, and caption sensitivity to
+  <b>0.3%</b>. The motion still looks plausible, because the motion prior does not need the text to
+  produce something humanoid — so distribution scores alone do not establish that the instruction was
+  followed.</p>
+
+  <figure>
+    <video src="panels_lite/full_clip201.mp4" poster="panels_lite/full_clip201.jpg"
+           controls loop muted playsinline preload="none"></video>
+    <figcaption>One instruction — <b>“the robot is sitting down.”</b> The third panel is the stock
+    model reading Hindi: it walks 1.12 m when told to sit. The fifth is ours, on the same Hindi
+    sentence.</figcaption>
+  </figure>
+</div></section>
+
+<section id="method"><div class="w">
+  <div class="sn">03 — Method</div>
+  <h2>Output geometry, not output shape</h2>
+
+  <p>An Indic caption is encoded by frozen MuRIL, mapped by the trained adapter, and consumed by the
+  frozen OMG denoiser. Nothing else receives a gradient.</p>
+
+  <div class="dia"><svg viewBox="0 0 900 300" xmlns="http://www.w3.org/2000/svg" style="width:100%;height:auto;min-width:620px">
+  <defs><marker id="a" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#9aa3ab"/></marker></defs>
+  <style>
+    .b{fill:#f5f6f7;stroke:#ccd2d8;stroke-width:1.2;rx:2}
+    .tn{fill:#fff;stroke:#3f4750;stroke-width:1.9;rx:2}
+    .io{fill:#fff;stroke:#dde1e5;stroke-width:1.2;rx:2}
+    .t1{font:600 13px -apple-system,sans-serif;fill:#17191b}
+    .t2{font:11px -apple-system,sans-serif;fill:#6d757d}
+    .tag{font:650 9px ui-monospace,monospace;fill:#5a6570;letter-spacing:.09em}
+    .dim{font:600 10.5px ui-monospace,monospace;fill:#474d53}
+    .lb{font:10.5px -apple-system,sans-serif;fill:#868d94}
+    .ln{stroke:#9aa3ab;stroke-width:1.3;fill:none;marker-end:url(#a)}
+  </style>
+  <rect class="io" x="4" y="56" width="146" height="66"/>
+  <text class="t1" x="77" y="80" text-anchor="middle">Indic caption</text>
+  <text class="t2" x="77" y="99" text-anchor="middle">रोबोट नीचे बैठा है</text>
+  <text class="t2" x="77" y="114" text-anchor="middle">“the robot sits down”</text>
+  <line class="ln" x1="152" y1="89" x2="182" y2="89"/>
+  <text class="dim" x="167" y="80" text-anchor="middle">50</text>
+  <text class="lb" x="167" y="44" text-anchor="middle">tokens</text>
+
+  <rect class="b" x="185" y="56" width="146" height="66"/>
+  <text class="tag" x="258" y="74" text-anchor="middle">FROZEN</text>
+  <text class="t1" x="258" y="94" text-anchor="middle">MuRIL</text>
+  <text class="t2" x="258" y="111" text-anchor="middle">reads all four scripts</text>
+  <line class="ln" x1="333" y1="89" x2="363" y2="89"/>
+  <text class="dim" x="348" y="80" text-anchor="middle">50×768</text>
+
+  <rect class="tn" x="366" y="56" width="146" height="66"/>
+  <text class="tag" x="439" y="74" text-anchor="middle">TRAINED — 3.9%</text>
+  <text class="t1" x="439" y="94" text-anchor="middle">Adapter</text>
+  <text class="t2" x="439" y="111" text-anchor="middle">4,725,505 params</text>
+  <line class="ln" x1="514" y1="89" x2="544" y2="89"/>
+  <text class="dim" x="529" y="80" text-anchor="middle">50×768</text>
+
+  <rect class="b" x="547" y="56" width="146" height="66"/>
+  <text class="tag" x="620" y="74" text-anchor="middle">FROZEN</text>
+  <text class="t1" x="620" y="94" text-anchor="middle">OMG denoiser</text>
+  <text class="t2" x="620" y="111" text-anchor="middle">121.3 M · diffusion</text>
+  <line class="ln" x1="695" y1="89" x2="725" y2="89"/>
+  <text class="dim" x="710" y="80" text-anchor="middle">60×125</text>
+
+  <rect class="b" x="728" y="56" width="160" height="66"/>
+  <text class="tag" x="808" y="74" text-anchor="middle">FROZEN</text>
+  <text class="t1" x="808" y="94" text-anchor="middle">Kinematic codec</text>
+  <text class="t2" x="808" y="111" text-anchor="middle">→ G1 joint angles</text>
+
+  <line class="ln" x1="620" y1="188" x2="620" y2="126"/>
+  <text class="dim" x="630" y="160" text-anchor="start">10×125</text>
+  <rect class="io" x="526" y="190" width="188" height="48"/>
+  <text class="t1" x="620" y="211" text-anchor="middle">Pose history</text>
+  <text class="t2" x="620" y="228" text-anchor="middle">last 10 frames · ⅓ s</text>
+
+  <line class="ln" x1="808" y1="126" x2="808" y2="188"/>
+  <text class="dim" x="818" y="160" text-anchor="start">60×36</text>
+  <rect class="io" x="730" y="190" width="158" height="48"/>
+  <text class="t1" x="809" y="211" text-anchor="middle">Unitree G1</text>
+  <text class="t2" x="809" y="228" text-anchor="middle">29 joints + root pose</text>
+  <path class="ln" d="M730 226 L 720 226"/>
+  <text class="lb" x="620" y="262" text-anchor="middle">the generated motion becomes the next pose history — generation is closed-loop</text>
+  </svg></div>
+
+  <p>Writing \(h=\mathrm{MuRIL}(\text{caption})\in\mathbb{R}^{50\times 768}\), the adapter is a
+  per-token residual MLP with a learned scalar gate \(\alpha\), followed by an affine recolouring:</p>
+
+  <div class="eq">
+    \[
+      u=\mathrm{LN}(h),\qquad
+      r=W_2\,\mathrm{drop}\!\left(\mathrm{GELU}(W_1u)\right),\qquad
+      y=u+\alpha\,r,\qquad
+      \hat{c}=\frac{y-\mu_{\mathrm{src}}}{\sigma_{\mathrm{src}}}\odot\gamma+\beta .
+    \]
+  </div>
+  <p class="eqn">\(W_1:768\!\to\!3072\) and \(W_2:3072\!\to\!768\); \(\alpha\) is initialised at
+  \(0.1\) and grows to \(0.1413\). \((\mu_{\mathrm{src}},\sigma_{\mathrm{src}})\) are frozen MuRIL
+  statistics measured on the training split; \((\gamma,\beta)\) are initialised at T5's measured
+  per-channel statistics and then trained.</p>
+
+  <p>The backbone's text projection is an identity, and we add no trainable projection in its place.
+  Replacing the encoder is therefore not a question of matching dimensionality: the substitute must
+  approximate the T5 <b>context geometry</b> — token norm and inter-token correlation — that the
+  frozen model expects. Subtracting the corpus mean before recolouring into T5 statistics restores
+  <b>13.8× more caption-specific signal</b> than an output layer normalisation, which cannot remove
+  a direction shared across every token.</p>
+
+  <p>A <b>geometry gate</b> runs before the first optimisation step: it measures the adapter's output
+  on 128 held-out captions and refuses to start training unless that distribution matches T5's. The
+  reported run passed on the first attempt, at token norm <b>7.123</b>, inter-caption cosine
+  <b>0.7501</b> and between-to-mean ratio <b>0.5719</b>, against T5 references of 6.758, 0.6563 and
+  0.7201.</p>
+
+  <h3>Motion as the pivot</h3>
+
+  <p>Two language views \(a\) and \(b\) of the same motion window are driven toward the same
+  prediction, with real motion as the primary target and a weak frozen-English response as an
+  anchor:</p>
+
+  <div class="eq">
+    \[
+      \mathcal{L}=\tfrac{1}{2}\big[\mathcal{L}_{\mathrm{nat}}(a)+\mathcal{L}_{\mathrm{nat}}(b)\big]
+      +\lambda_x\big\|\hat{x}_0(a)-\hat{x}_0(b)\big\|^2
+      +\tfrac{\lambda_{\mathrm{en}}}{2}\Big[\big\|\hat{x}_0(a)-\mathrm{sg}\,\hat{x}_0^{\,\mathrm{en}}\big\|^2
+      +\big\|\hat{x}_0(b)-\mathrm{sg}\,\hat{x}_0^{\,\mathrm{en}}\big\|^2\Big]
+    \]
+  </div>
+  <p class="eqn">\(\mathcal{L}_{\mathrm{nat}}\) is the backbone's own denoising loss against the real
+  motion; \(\mathrm{sg}\) is a stop-gradient. We anneal \(\lambda_x\) from \(0.5\) to \(0.2\) and
+  hold \(\lambda_{\mathrm{en}}=0.1\).</p>
+
+  <p>Both branches replay one saved random state, so the noise level, the noise, the noised input and
+  the adapter's dropout mask are identical — the only difference between them is which caption
+  produced the context. Because real motion carries weight one, the English response is a weak
+  auxiliary teacher rather than a ceiling, and it is applied symmetrically to both Indic branches, so
+  no Indic language is privileged. Text-induced variance, monitored but never optimised, rose from
+  \(2.0\times10^{-4}\) to \(2.5\text{–}4.2\times10^{-3}\) over training.</p>
+</div></section>
+
+<section id="results"><div class="w">
+  <div class="sn">04 — Results</div>
+  <h2>87–91% of the stock-English control, from a caption the model could not read</h2>
+
+  <p>Evaluation uses 1,024 test windows, one per super-group, drawn from a test split rebuilt so that
+  <b>0%</b> of it was seen during backbone pretraining — against 56.5% for a conventionally built
+  split. All arms share windows, 10-frame histories and identifier-hashed noise, so every comparison
+  is paired item by item. Chance R@1 is 0.031.</p>
+
+  <div class="tw"><table>
+    <caption>Bold marks the best of the three Indic-input arms. Motion generated from the Indic
+    caption is retrieved against the paired English caption through the unmodified evaluator.</caption>
+    <tr><th>Arm</th><th class="n">R@1 ↑</th><th class="n">R@3 ↑</th><th class="n">FID ↓</th>
+        <th class="n">KID ↓</th><th class="n">Caption sens. ↑</th></tr>
+
+    <tr class="sec"><td colspan="6">Hindi</td></tr>
+    <tr><td class="k">english (control)</td><td class="n">0.3174</td><td class="n">0.5908</td><td class="n">0.0446</td><td class="n">2.9e-5</td><td class="n">9.3%</td></tr>
+    <tr><td class="k">reference (real motion)</td><td class="n">0.2891</td><td class="n">0.5381</td><td class="n mut">—</td><td class="n mut">—</td><td class="n mut">—</td></tr>
+    <tr><td class="k">PraMD</td><td class="n best">0.2900</td><td class="n best">0.5254</td><td class="n best">0.0422</td><td class="n best">1.5e-5</td><td class="n best">7.3%</td></tr>
+    <tr><td class="k">translate-test</td><td class="n">0.2607</td><td class="n">0.5098</td><td class="n">0.0912</td><td class="n">1.2e-4</td><td class="n mut">—</td></tr>
+    <tr><td class="k">stock (Indic direct)</td><td class="n bad">0.1328</td><td class="n bad">0.3135</td><td class="n bad">0.2141</td><td class="n bad">4.6e-4</td><td class="n bad">0.3%</td></tr>
+
+    <tr class="sec"><td colspan="6">Bengali</td></tr>
+    <tr><td class="k">PraMD</td><td class="n best">0.2754</td><td class="n">0.5117</td><td class="n best">0.0438</td><td class="n best">1.7e-5</td><td class="n best">6.4%</td></tr>
+    <tr><td class="k">translate-test</td><td class="n">0.2646</td><td class="n best">0.5195</td><td class="n">0.0902</td><td class="n">1.2e-4</td><td class="n mut">—</td></tr>
+    <tr><td class="k">stock</td><td class="n bad">0.1436</td><td class="n bad">0.3203</td><td class="n bad">0.1980</td><td class="n bad">4.0e-4</td><td class="n bad">0.5%</td></tr>
+
+    <tr class="sec"><td colspan="6">Tamil</td></tr>
+    <tr><td class="k">PraMD</td><td class="n best">0.2773</td><td class="n">0.5137</td><td class="n best">0.0417</td><td class="n best">1.4e-5</td><td class="n best">7.1%</td></tr>
+    <tr><td class="k">translate-test</td><td class="n">0.2686</td><td class="n best">0.5176</td><td class="n">0.0923</td><td class="n">1.2e-4</td><td class="n mut">—</td></tr>
+    <tr><td class="k">stock</td><td class="n bad">0.1465</td><td class="n bad">0.3291</td><td class="n bad">0.1756</td><td class="n bad">3.6e-4</td><td class="n bad">0.0%</td></tr>
+
+    <tr class="sec"><td colspan="6">Telugu</td></tr>
+    <tr><td class="k">PraMD</td><td class="n best">0.2764</td><td class="n">0.5215</td><td class="n best">0.0419</td><td class="n best">1.4e-5</td><td class="n best">6.0%</td></tr>
+    <tr><td class="k">translate-test</td><td class="n">0.2627</td><td class="n best">0.5303</td><td class="n">0.0930</td><td class="n">1.3e-4</td><td class="n mut">—</td></tr>
+    <tr><td class="k">stock</td><td class="n bad">0.1426</td><td class="n bad">0.3340</td><td class="n bad">0.1812</td><td class="n bad">3.8e-4</td><td class="n bad">0.2%</td></tr>
+  </table></div>
+
+  <ul>
+    <li>Against direct Indic input, PraMD gains <b>+0.13 to +0.16 R@1</b> in every language, at
+    \(p<10^{-19}\) — roughly double.</li>
+    <li>Against the paired <b>real motion</b> arm, scored by the same evaluator, no R@1 difference is
+    detected in any language.</li>
+    <li>Paired FID against the English control is <b>\(-0.0024\)</b> with a 95% interval of
+    \([-0.0054,\,+0.0014]\) in Hindi, and spans zero in all four languages.</li>
+    <li>FID is <b>2.1–2.2× lower</b> than translate-test, and KID lower in all four languages —
+    with no translation system anywhere in the inference path.</li>
+  </ul>
+
+  <h3>Single-word instruction following</h3>
+
+  <p>One word in the <b>Indic</b> caption is swapped for its opposite and the motion regenerated with
+  matched history and noise. Ground truth is a kinematic quantity — metres of sagittal displacement,
+  or metres per second of pelvis speed — not a rater. The null baseline is 50%.</p>
+
+  <div class="tw"><table>
+    <caption>Forward and backward use 256 pairs per language; speed uses 95–138. Stock ties at the
+    null because a swapped Indic word changes nothing its tokenizer can see, which is what gives the
+    measure its range.</caption>
+    <tr><th>Swap</th><th class="n">English</th><th class="n">Hindi</th><th class="n">Bengali</th>
+        <th class="n">Tamil</th><th class="n">Telugu</th><th class="n">stock</th></tr>
+    <tr><td class="k">forward ↔ backward</td><td class="n">87.5</td><td class="n">84.8</td><td class="n">82.4</td><td class="n best">91.4</td><td class="n">86.3</td><td class="n mut">50.0</td></tr>
+    <tr><td class="k">fast ↔ slow</td><td class="n">91.0</td><td class="n">93.7</td><td class="n best">98.1</td><td class="n">94.2</td><td class="n">74.6</td><td class="n mut">50.0</td></tr>
+  </table></div>
+
+  <p>Speed and sagittal direction transfer at English level in every language, with Bengali and Tamil
+  edging above the English control on both axes.</p>
+</div></section>
+
+<section id="renders"><div class="w">
+  <div class="sn">05 — Renders</div>
+  <h2>Eight clips, four languages, one shared adapter</h2>
+
+  <p>Every render shares a clip, a checkpoint, guidance 2.5 and seed 0 — only the language changes.
+  Each video has four panels: <b>ground truth</b>, <b>stock + English</b>, <b>stock + Indic</b>, and
+  <b>ours + Indic</b>. Generation is closed-loop over 140–290 frames, with each 60-frame chunk fed
+  back as history. Across the 32 clip–language pairs, ours has <b>lower pose error on 25</b>.</p>
+
+  <div class="tabs" role="tablist">
+    <button role="tab" aria-selected="true" data-l="hi">Hindi</button>
+    <button role="tab" aria-selected="false" data-l="bn">Bengali</button>
+    <button role="tab" aria-selected="false" data-l="ta">Tamil</button>
+    <button role="tab" aria-selected="false" data-l="te">Telugu</button>
+  </div>
+  <div id="clips"></div>
+
+  <h3>Full reel</h3>
+  <figure>
+    <video id="reel" src="media/hi/REEL_en_vs_hi.mp4" poster="media/hi/REEL_en_vs_hi.jpg"
+           controls loop muted playsinline preload="none"></video>
+    <figcaption>All eight clips in sequence for the selected language, with the same four panels
+    throughout. Panel labels read “MAILA”, the configuration's earlier name, which the released
+    artifacts also use.</figcaption>
+  </figure>
+</div></section>
+
+
+<section id="code"><div class="w">
+  <div class="sn">06 — Code and data</div>
+  <h2>Release</h2>
+
+  <p>Corpus annotations, evaluator-clean splits, calibration, training and evaluation logs,
+  checkpoints, evaluation artifacts, and a manifest carrying a checksum per file. Upstream G1 motion
+  data remains subject to its original distribution terms. The released checkpoints and evaluation
+  artifacts carry the configuration's earlier name.</p>
+
+  <ul>
+    <li><a class="ln" href="https://huggingface.co/datasets/CodeSushh/maila-run3-motionpivot/tree/main">Run 3 artifacts</a> — checkpoints, splits, calibration, evaluation outputs and logs</li>
+    <li><a class="ln" href="https://github.com/SushOS/IndicVLA/tree/run3-results">Run 3 code</a> — training, evaluation and render pipeline</li>
+    <li><a class="ln" href="https://huggingface.co/datasets/CodeSushh/maila-run2-motionpivot/tree/main">Run 2 artifacts</a> and <a class="ln" href="https://github.com/SushOS/IndicVLA/tree/run2-results">Run 2 code</a> — the Hindi-only precursor that established the objective</li>
+  </ul>
+
+  <div class="tw"><table>
+    <caption>Training and evaluation configuration.</caption>
+    <tr><th>Item</th><th>Value</th></tr>
+    <tr><td class="k">Backbone</td><td>OMG 100M generator, frozen, together with MuRIL and T5</td></tr>
+    <tr><td class="k">Trainable parameters</td><td>4,725,505 in nine tensors — 3.9% of the 121.3M denoiser</td></tr>
+    <tr><td class="k">Training</td><td>60,000 steps, effective batch 256, AdamW at 1e-4 with cosine decay</td></tr>
+    <tr><td class="k">Hardware</td><td>one RTX 4090 — 0.466 s per step, 17.1 GB peak, 7.8 hours</td></tr>
+    <tr><td class="k">Selected checkpoint</td><td>step 36,000, chosen on validation only</td></tr>
+  </table></div>
+
+  <h3>Citation</h3>
+  <div class="cite">@inproceedings{pramd2027,
+  title     = {PraMD: Indic-Language Conditioning of a Frozen
+               Humanoid Motion Diffusion Model},
+  booktitle = {IEEE International Conference on Robotics and Automation},
+  year      = {2027}
+}</div>
+</div></section>
+
+<footer><div class="w">
+  <p>PraMD · IndicMotion-G1 · ICRA 2027 submission, under review. Physical quantities reported here
+  are kinematic, computed from joint angles and body positions; no simulator or tracker is used.</p>
+</div></footer>
+
+<script>
+var CLIPS = [
+ {id:"734027",fr:257,sec:8.6,en:"a person walks up stairs with their right hand on something.",
+  caps:{hi:"एक व्यक्ति किसी चीज़ पर अपना दाहिना हाथ रखकर सीढ़ियाँ चढ़ता है।",
+        bn:"একজন ব্যক্তি তাদের ডান হাত দিয়ে সিঁড়ি বেয়ে উঠছেন।",
+        ta:"ஒரு நபர் தனது வலது கையை எதையாவது வைத்து படிக்கட்டுகளில் ஏறுகிறார்.",
+        te:"ఒక వ్యక్తి తన కుడి చేతితో ఏదో ఒకదానిపై మెట్లు పైకి వెళ్తాడు."},
+  L:{hi:[86.0,164.3],bn:[88.6,169.3],ta:[82.7,153.3],te:[108.0,154.8]}},
+ {id:"710237",fr:143,sec:4.8,en:"A person uses one hand to open the oven, then switches to the other hand to close it.",
+  L:{hi:[82.7,158.5],bn:[81.7,157.0],ta:[85.1,161.9],te:[84.5,161.9]}},
+ {id:"637615",fr:140,sec:4.7,en:"stand up from seated position and rotate body; style: smooth",
+  L:{hi:[84.5,180.7],bn:[120.7,179.1],ta:[104.7,173.4],te:[103.6,164.2]}},
+ {id:"710677",fr:140,sec:4.7,en:"adjust arms, step back, place hands on hips; style: deliberate",
+  L:{hi:[92.6,140.2],bn:[100.9,132.3],ta:[100.5,119.6],te:[102.6,120.1]}},
+ {id:"654639",fr:290,sec:9.7,en:"a person opens a laptop and types on the keyboard.",
+  caps:{hi:"एक व्यक्ति लैपटॉप खोलता है और कीबोर्ड पर टाइप करता है।",
+        bn:"একজন ব্যক্তি একটি ল্যাপটপ খুলে কীবোর্ডে টাইপ করেন।"},
+  L:{hi:[92.6,95.0],bn:[89.2,93.3],ta:[101.0,91.4],te:[139.1,93.4]}},
+ {id:"711217",fr:155,sec:5.2,en:"walk forward and turn torso to face camera; style: steady",
+  L:{hi:[162.7,171.2],bn:[166.0,171.5],ta:[158.0,170.3],te:[156.6,171.4]}},
+ {id:"710270",fr:266,sec:8.9,en:"A person uses their right hand to pick up a pen, kneels down, puts the pen down.",
+  L:{hi:[200.7,266.9],bn:[230.7,280.2],ta:[211.8,211.9],te:[266.1,217.2]}},
+ {id:"638091",fr:140,sec:4.7,en:"whirl right arm upward while shifting torso; style: dynamic",
+  L:{hi:[175.4,173.0],bn:[175.9,171.2],ta:[180.7,170.5],te:[173.9,170.5]}}
+];
+
+function render(L){
+  document.getElementById('clips').innerHTML = CLIPS.map(function(c){
+    var m = c.L[L] || [], mp = m[0], sp = m[1];
+    var cap = (c.caps && c.caps[L]) ? '<span class="x">' + c.caps[L] + '</span>' : '';
+    var met = '';
+    if (mp != null) {
+      met = '<div class="mrow">pose error &nbsp; ours <span class="' +
+            (mp < sp ? 'win' : '') + '">' + mp.toFixed(1) +
+            ' mm</span> &nbsp;·&nbsp; stock + Indic ' + sp.toFixed(1) + ' mm</div>';
+    }
+    var base = 'media/' + L + '/clip' + c.id + '_en_vs_' + L;
+    return '<div class="clip">' +
+      '<div class="ch"><span class="t">' + c.en + '</span>' +
+      '<span class="m">' + c.fr + ' frames · ' + c.sec + ' s</span></div>' +
+      (cap ? '<div class="cap">' + cap + '</div>' : '') +
+      '<video src="' + base + '.mp4" poster="' + base + '.jpg" controls loop muted ' +
+      'playsinline preload="none"></video>' + met + '</div>';
+  }).join('');
+  var r = document.getElementById('reel');
+  r.pause();
+  r.src = 'media/' + L + '/REEL_en_vs_' + L + '.mp4';
+  r.poster = 'media/' + L + '/REEL_en_vs_' + L + '.jpg';
+  r.load();
+}
+document.querySelectorAll('.tabs button').forEach(function(b){
+  b.addEventListener('click', function(){
+    document.querySelectorAll('.tabs button').forEach(function(x){
+      x.setAttribute('aria-selected', String(x === b));
+    });
+    render(b.dataset.l);
+  });
+});
+render('hi');
+
+window.addEventListener('load', function(){
+  if (window.renderMathInElement) {
+    renderMathInElement(document.body, {
+      delimiters: [
+        {left: "\\[", right: "\\]", display: true},
+        {left: "\\(", right: "\\)", display: false}
+      ],
+      throwOnError: false
+    });
+  }
+});
+</script>
+</body></html>

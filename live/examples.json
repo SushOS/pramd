@@ -1,0 +1,802 @@
+{
+ "about": "Held-out test captions whose generated motion passed every kinematic check they imply, re-verified through the live server and reviewed visually.",
+ "seed_kind": "static",
+ "seconds": 6.0,
+ "seed": 0,
+ "mode": "pramd",
+ "adapter_sha16": "2a3ea341891d9609",
+ "stats": {
+  "hi": {
+   "kept": 8,
+   "dropped": [
+    {
+     "en": "a person dances and twists feet on the spot.",
+     "why": "failed on re-verification"
+    }
+   ],
+   "refill_generations": 2
+  },
+  "bn": {
+   "kept": 8,
+   "dropped": [
+    {
+     "en": "a person casually jogs forward.",
+     "why": "failed on re-verification"
+    },
+    {
+     "en": "a person dances and twists feet on the spot.",
+     "why": "failed on re-verification"
+    }
+   ],
+   "refill_generations": 14
+  },
+  "ta": {
+   "kept": 8,
+   "dropped": [],
+   "refill_generations": 0
+  },
+  "te": {
+   "kept": 8,
+   "dropped": [],
+   "refill_generations": 0
+  },
+  "en": {
+   "kept": 8,
+   "dropped": [],
+   "refill_generations": 11
+  }
+ },
+ "languages": {
+  "hi": [
+   {
+    "text": "एक व्यक्ति छोटे-छोटे कदम उठाते हुए आगे बढ़ता है।",
+    "en": "a person walks forward taking small steps.",
+    "category": "walk_forward",
+    "checks": [
+     "moves forward"
+    ],
+    "clip_id": 733828,
+    "dx": 3.21,
+    "turn_deg": 4,
+    "dz": [
+     -0.06,
+     0.0
+    ],
+    "frames_file": "d52a85e662.npy",
+    "motion": "motions/d52a85e662.json"
+   },
+   {
+    "text": "एक आदमी धीरे-धीरे और शांति से आगे बढ़ता है।",
+    "en": "a man walks forward slowly and calmly.",
+    "category": "walk_forward",
+    "checks": [
+     "moves forward"
+    ],
+    "clip_id": 654370,
+    "dx": 3.19,
+    "turn_deg": 5,
+    "dz": [
+     -0.06,
+     0.0
+    ],
+    "frames_file": "5f63a0b744.npy",
+    "motion": "motions/5f63a0b744.json"
+   },
+   {
+    "text": "एक खड़ा व्यक्ति धीरे-धीरे पीछे की ओर चलता है और रुक जाता है।",
+    "en": "a standing person slowly walks backwards then stops.",
+    "category": "walk_backward",
+    "checks": [
+     "moves backward"
+    ],
+    "clip_id": 733756,
+    "dx": -1.37,
+    "turn_deg": 3,
+    "dz": [
+     -0.03,
+     0.0
+    ],
+    "frames_file": "16f079b9b5.npy",
+    "motion": "motions/16f079b9b5.json"
+   },
+   {
+    "text": "एक व्यक्ति आगे की ओर चौड़े कदमों से दौड़ता है।",
+    "en": "a person runs with a wide stride forward.",
+    "category": "run",
+    "checks": [
+     "moves quickly"
+    ],
+    "clip_id": 734414,
+    "dx": 6.35,
+    "turn_deg": 1,
+    "dz": [
+     -0.13,
+     0.0
+    ],
+    "frames_file": "70b84931e8.npy",
+    "motion": "motions/70b84931e8.json"
+   },
+   {
+    "text": "एक व्यक्ति दोनों हाथ शरीर के सामने फैलाकर बैठ जाता है।",
+    "en": "a person squats down extending both arms in front of the body.",
+    "category": "squat",
+    "checks": [
+     "lowers the body"
+    ],
+    "clip_id": 653285,
+    "dx": -0.12,
+    "turn_deg": 12,
+    "dz": [
+     -0.43,
+     0.0
+    ],
+    "frames_file": "a8fe783628.npy",
+    "motion": "motions/a8fe783628.json"
+   },
+   {
+    "text": "एक आदमी दो स्पार्टन किक मारता है, उसके बाद दो मध्यम ऊँची किक मारता है।",
+    "en": "a man makes two spartan kicks, followed by two medium high kicks.",
+    "category": "kick",
+    "checks": [
+     "lifts a foot high"
+    ],
+    "clip_id": 654472,
+    "dx": 0.02,
+    "turn_deg": 6,
+    "dz": [
+     -0.06,
+     0.0
+    ],
+    "frames_file": "5e48b28c9a.npy",
+    "motion": "motions/5e48b28c9a.json"
+   },
+   {
+    "text": "आदमी अपने पैरों को अपने सामने वृत्ताकार नृत्य करता है।",
+    "en": "the man dances his feet in circles in front of himself.",
+    "category": "dance",
+    "checks": [
+     "moves expressively"
+    ],
+    "clip_id": 654591,
+    "dx": 0.41,
+    "turn_deg": 1,
+    "dz": [
+     -0.05,
+     0.01
+    ],
+    "frames_file": "6be97c1e32.npy",
+    "motion": "motions/6be97c1e32.json"
+   },
+   {
+    "text": "एक व्यक्ति वाल्ट्ज में नृत्य करता है.",
+    "en": "a person dances in a waltz.",
+    "category": "dance",
+    "checks": [
+     "moves expressively"
+    ],
+    "clip_id": 652718,
+    "dx": -0.01,
+    "turn_deg": 3,
+    "dz": [
+     -0.08,
+     0.02
+    ],
+    "frames_file": "368fbd9cb8.npy",
+    "motion": "motions/368fbd9cb8.json"
+   }
+  ],
+  "bn": [
+   {
+    "text": "একজন ব্যক্তি ছোট ছোট পদক্ষেপ নিয়ে এগিয়ে যায়।",
+    "en": "a person walks forward taking small steps.",
+    "category": "walk_forward",
+    "checks": [
+     "moves forward"
+    ],
+    "clip_id": 733828,
+    "dx": 3.92,
+    "turn_deg": 0,
+    "dz": [
+     -0.08,
+     0.0
+    ],
+    "frames_file": "05c7e241c3.npy",
+    "motion": "motions/05c7e241c3.json"
+   },
+   {
+    "text": "একজন মানুষ ধীরে ধীরে এবং শান্তভাবে এগিয়ে যায়।",
+    "en": "a man walks forward slowly and calmly.",
+    "category": "walk_forward",
+    "checks": [
+     "moves forward"
+    ],
+    "clip_id": 654370,
+    "dx": 4.04,
+    "turn_deg": 0,
+    "dz": [
+     -0.06,
+     0.0
+    ],
+    "frames_file": "f69cea287a.npy",
+    "motion": "motions/f69cea287a.json"
+   },
+   {
+    "text": "একজন ব্যক্তি কাছাকাছি সরলরেখায় এগিয়ে যাচ্ছেন",
+    "en": "a person walks forward in a near straight line",
+    "category": "walk_forward",
+    "checks": [
+     "moves forward"
+    ],
+    "clip_id": 652929,
+    "dx": 4.93,
+    "turn_deg": 2,
+    "dz": [
+     -0.06,
+     0.0
+    ],
+    "frames_file": "95dd43b329.npy",
+    "motion": "motions/95dd43b329.json"
+   },
+   {
+    "text": "একজন দাঁড়ানো ব্যক্তি ধীরে ধীরে পিছনের দিকে হাঁটে তারপর থেমে যায়।",
+    "en": "a standing person slowly walks backwards then stops.",
+    "category": "walk_backward",
+    "checks": [
+     "moves backward"
+    ],
+    "clip_id": 733756,
+    "dx": -1.72,
+    "turn_deg": 5,
+    "dz": [
+     -0.04,
+     0.0
+    ],
+    "frames_file": "2fc184ea8e.npy",
+    "motion": "motions/2fc184ea8e.json"
+   },
+   {
+    "text": "একজন মানুষ দুটি স্পার্টান কিক করে, তার পরে দুটি মাঝারি উচ্চ লাথি।",
+    "en": "a man makes two spartan kicks, followed by two medium high kicks.",
+    "category": "kick",
+    "checks": [
+     "lifts a foot high"
+    ],
+    "clip_id": 654472,
+    "dx": 0.03,
+    "turn_deg": 3,
+    "dz": [
+     -0.06,
+     0.0
+    ],
+    "frames_file": "124b3e8ed1.npy",
+    "motion": "motions/124b3e8ed1.json"
+   },
+   {
+    "text": "লোকটি নিজের সামনে বৃত্তে পা নাচায়।",
+    "en": "the man dances his feet in circles in front of himself.",
+    "category": "dance",
+    "checks": [
+     "moves expressively"
+    ],
+    "clip_id": 654591,
+    "dx": 1.28,
+    "turn_deg": 2,
+    "dz": [
+     -0.04,
+     0.01
+    ],
+    "frames_file": "236d88a0fd.npy",
+    "motion": "motions/236d88a0fd.json"
+   },
+   {
+    "text": "একজন ব্যক্তি ওয়াল্টজে নাচছেন।",
+    "en": "a person dances in a waltz.",
+    "category": "dance",
+    "checks": [
+     "moves expressively"
+    ],
+    "clip_id": 652718,
+    "dx": 0.37,
+    "turn_deg": 7,
+    "dz": [
+     -0.05,
+     0.01
+    ],
+    "frames_file": "4ed538fca8.npy",
+    "motion": "motions/4ed538fca8.json"
+   },
+   {
+    "text": "ব্যক্তিটি তার উভয় হাত ঘুরিয়ে নাচছে",
+    "en": "the person is dancing by moving both his hands around",
+    "category": "dance",
+    "checks": [
+     "moves expressively"
+    ],
+    "clip_id": 653937,
+    "dx": 0.09,
+    "turn_deg": 5,
+    "dz": [
+     -0.03,
+     0.01
+    ],
+    "frames_file": "ad928c45f0.npy",
+    "motion": "motions/ad928c45f0.json"
+   }
+  ],
+  "ta": [
+   {
+    "text": "ஒரு நபர் சிறிய படிகளை எடுத்துக்கொண்டு முன்னோக்கி செல்கிறார்.",
+    "en": "a person walks forward taking small steps.",
+    "category": "walk_forward",
+    "checks": [
+     "moves forward"
+    ],
+    "clip_id": 733828,
+    "dx": 2.95,
+    "turn_deg": 2,
+    "dz": [
+     -0.07,
+     0.0
+    ],
+    "frames_file": "b5f0d521fd.npy",
+    "motion": "motions/b5f0d521fd.json"
+   },
+   {
+    "text": "ஒரு மனிதன் மெதுவாகவும் அமைதியாகவும் நடக்கிறான்.",
+    "en": "a man walks forward slowly and calmly.",
+    "category": "walk_forward",
+    "checks": [
+     "moves forward"
+    ],
+    "clip_id": 654370,
+    "dx": 3.22,
+    "turn_deg": 3,
+    "dz": [
+     -0.04,
+     0.0
+    ],
+    "frames_file": "6accf78454.npy",
+    "motion": "motions/6accf78454.json"
+   },
+   {
+    "text": "நிற்கும் நபர் மெதுவாக பின்னோக்கி நடந்து சென்று நிறுத்துகிறார்.",
+    "en": "a standing person slowly walks backwards then stops.",
+    "category": "walk_backward",
+    "checks": [
+     "moves backward"
+    ],
+    "clip_id": 733756,
+    "dx": -1.35,
+    "turn_deg": 1,
+    "dz": [
+     -0.03,
+     0.0
+    ],
+    "frames_file": "e41a2cefeb.npy",
+    "motion": "motions/e41a2cefeb.json"
+   },
+   {
+    "text": "மனிதன் 4 படிகள் முன்னோக்கி ஓடுகிறான்.",
+    "en": "the man jogs forward 4 steps.",
+    "category": "run",
+    "checks": [
+     "moves forward",
+     "moves quickly"
+    ],
+    "clip_id": 652979,
+    "dx": 6.69,
+    "turn_deg": 5,
+    "dz": [
+     -0.13,
+     0.0
+    ],
+    "frames_file": "8079c134e9.npy",
+    "motion": "motions/8079c134e9.json"
+   },
+   {
+    "text": "ஒரு நபர் சாதாரணமாக முன்னோக்கி ஓடுகிறார்.",
+    "en": "a person casually jogs forward.",
+    "category": "run",
+    "checks": [
+     "moves forward",
+     "moves quickly"
+    ],
+    "clip_id": 653384,
+    "dx": 6.95,
+    "turn_deg": 2,
+    "dz": [
+     -0.12,
+     0.0
+    ],
+    "frames_file": "d1a7e43121.npy",
+    "motion": "motions/d1a7e43121.json"
+   },
+   {
+    "text": "ஒரு நபர் இரு கைகளையும் உடலின் முன் நீட்டி குந்துகிறார்.",
+    "en": "a person squats down extending both arms in front of the body.",
+    "category": "squat",
+    "checks": [
+     "lowers the body"
+    ],
+    "clip_id": 653285,
+    "dx": 0.19,
+    "turn_deg": 12,
+    "dz": [
+     -0.41,
+     0.0
+    ],
+    "frames_file": "f5525251b5.npy",
+    "motion": "motions/f5525251b5.json"
+   },
+   {
+    "text": "ஒரு மனிதன் இரண்டு ஸ்பார்டன் உதைகளை செய்கிறான், அதைத் தொடர்ந்து இரண்டு நடுத்தர உயர் உதைகளை செய்கிறான்.",
+    "en": "a man makes two spartan kicks, followed by two medium high kicks.",
+    "category": "kick",
+    "checks": [
+     "lifts a foot high"
+    ],
+    "clip_id": 654472,
+    "dx": -0.01,
+    "turn_deg": 1,
+    "dz": [
+     -0.04,
+     0.0
+    ],
+    "frames_file": "714577390b.npy",
+    "motion": "motions/714577390b.json"
+   },
+   {
+    "text": "ஒரு நபர் நடனமாடுகிறார் மற்றும் அந்த இடத்தில் கால்களைத் திருப்புகிறார்.",
+    "en": "a person dances and twists feet on the spot.",
+    "category": "dance",
+    "checks": [
+     "stays in place",
+     "moves expressively"
+    ],
+    "clip_id": 653810,
+    "dx": 0.09,
+    "turn_deg": 4,
+    "dz": [
+     -0.04,
+     0.01
+    ],
+    "frames_file": "1b5f707ba9.npy",
+    "motion": "motions/1b5f707ba9.json"
+   }
+  ],
+  "te": [
+   {
+    "text": "ఒక వ్యక్తి చిన్న అడుగులు వేస్తూ ముందుకు నడుస్తాడు.",
+    "en": "a person walks forward taking small steps.",
+    "category": "walk_forward",
+    "checks": [
+     "moves forward"
+    ],
+    "clip_id": 733828,
+    "dx": 3.27,
+    "turn_deg": 5,
+    "dz": [
+     -0.06,
+     0.0
+    ],
+    "frames_file": "efd72ace0e.npy",
+    "motion": "motions/efd72ace0e.json"
+   },
+   {
+    "text": "ఒక వ్యక్తి నెమ్మదిగా మరియు ప్రశాంతంగా ముందుకు నడుస్తాడు.",
+    "en": "a man walks forward slowly and calmly.",
+    "category": "walk_forward",
+    "checks": [
+     "moves forward"
+    ],
+    "clip_id": 654370,
+    "dx": 4.09,
+    "turn_deg": 1,
+    "dz": [
+     -0.05,
+     0.0
+    ],
+    "frames_file": "f98774f0d9.npy",
+    "motion": "motions/f98774f0d9.json"
+   },
+   {
+    "text": "నిలబడి ఉన్న వ్యక్తి నెమ్మదిగా వెనుకకు నడుస్తూ ఆగిపోతాడు.",
+    "en": "a standing person slowly walks backwards then stops.",
+    "category": "walk_backward",
+    "checks": [
+     "moves backward"
+    ],
+    "clip_id": 733756,
+    "dx": -0.69,
+    "turn_deg": 3,
+    "dz": [
+     -0.03,
+     0.0
+    ],
+    "frames_file": "5a960f580b.npy",
+    "motion": "motions/5a960f580b.json"
+   },
+   {
+    "text": "మనిషి 4 అడుగులు ముందుకు జాగ్ చేస్తాడు.",
+    "en": "the man jogs forward 4 steps.",
+    "category": "run",
+    "checks": [
+     "moves forward",
+     "moves quickly"
+    ],
+    "clip_id": 652979,
+    "dx": 5.87,
+    "turn_deg": 2,
+    "dz": [
+     -0.12,
+     0.03
+    ],
+    "frames_file": "0389065c71.npy",
+    "motion": "motions/0389065c71.json"
+   },
+   {
+    "text": "ఒక వ్యక్తి సాధారణంగా ముందుకు జాగ్ చేస్తాడు.",
+    "en": "a person casually jogs forward.",
+    "category": "run",
+    "checks": [
+     "moves forward",
+     "moves quickly"
+    ],
+    "clip_id": 653384,
+    "dx": 6.27,
+    "turn_deg": 3,
+    "dz": [
+     -0.14,
+     0.01
+    ],
+    "frames_file": "bc0d09b972.npy",
+    "motion": "motions/bc0d09b972.json"
+   },
+   {
+    "text": "ఒక వ్యక్తి శరీరం ముందు రెండు చేతులను చాచి చతికిలబడ్డాడు.",
+    "en": "a person squats down extending both arms in front of the body.",
+    "category": "squat",
+    "checks": [
+     "lowers the body"
+    ],
+    "clip_id": 653285,
+    "dx": 0.1,
+    "turn_deg": 3,
+    "dz": [
+     -0.38,
+     0.0
+    ],
+    "frames_file": "9bbe67ff62.npy",
+    "motion": "motions/9bbe67ff62.json"
+   },
+   {
+    "text": "ఒక వ్యక్తి రెండు స్పార్టన్ కిక్‌లు చేస్తాడు, తర్వాత రెండు మీడియం హై కిక్‌లు వేస్తాడు.",
+    "en": "a man makes two spartan kicks, followed by two medium high kicks.",
+    "category": "kick",
+    "checks": [
+     "lifts a foot high"
+    ],
+    "clip_id": 654472,
+    "dx": 0.07,
+    "turn_deg": 2,
+    "dz": [
+     -0.06,
+     0.01
+    ],
+    "frames_file": "ff3b1882e0.npy",
+    "motion": "motions/ff3b1882e0.json"
+   },
+   {
+    "text": "ఒక వ్యక్తి వాల్ట్జ్‌లో నృత్యం చేస్తాడు.",
+    "en": "a person dances in a waltz.",
+    "category": "dance",
+    "checks": [
+     "moves expressively"
+    ],
+    "clip_id": 652718,
+    "dx": 0.08,
+    "turn_deg": 4,
+    "dz": [
+     -0.08,
+     0.01
+    ],
+    "frames_file": "9692f44ba3.npy",
+    "motion": "motions/9692f44ba3.json"
+   }
+  ],
+  "en": [
+   {
+    "text": "a person walks forward taking small steps.",
+    "en": "a person walks forward taking small steps.",
+    "category": "walk_forward",
+    "checks": [
+     "moves forward"
+    ],
+    "clip_id": 733828,
+    "dx": 3.87,
+    "turn_deg": 3,
+    "dz": [
+     -0.05,
+     0.01
+    ],
+    "frames_file": "6487700dec.npy",
+    "motion": "motions/6487700dec.json"
+   },
+   {
+    "text": "a man walks forward slowly and calmly.",
+    "en": "a man walks forward slowly and calmly.",
+    "category": "walk_forward",
+    "checks": [
+     "moves forward"
+    ],
+    "clip_id": 654370,
+    "dx": 3.54,
+    "turn_deg": 2,
+    "dz": [
+     -0.04,
+     0.01
+    ],
+    "frames_file": "33bc316ab3.npy",
+    "motion": "motions/33bc316ab3.json"
+   },
+   {
+    "text": "a person casually walks forward and then stops dramatically.",
+    "en": "a person casually walks forward and then stops dramatically.",
+    "category": "walk_forward",
+    "checks": [
+     "moves forward"
+    ],
+    "clip_id": 652570,
+    "dx": 3.22,
+    "turn_deg": 0,
+    "dz": [
+     -0.05,
+     0.01
+    ],
+    "frames_file": "2e5f1693de.npy",
+    "motion": "motions/2e5f1693de.json"
+   },
+   {
+    "text": "figure walks in a semi-circle, and sits down on the floor",
+    "en": "figure walks in a semi-circle, and sits down on the floor",
+    "category": "sit_ground",
+    "checks": [
+     "sits down"
+    ],
+    "clip_id": 735581,
+    "dx": -0.09,
+    "turn_deg": 79,
+    "dz": [
+     -0.48,
+     0.0
+    ],
+    "frames_file": "2e3712a9dc.npy",
+    "motion": "motions/2e3712a9dc.json"
+   },
+   {
+    "text": "a man makes two spartan kicks, followed by two medium high kicks.",
+    "en": "a man makes two spartan kicks, followed by two medium high kicks.",
+    "category": "kick",
+    "checks": [
+     "lifts a foot high"
+    ],
+    "clip_id": 654472,
+    "dx": 0.09,
+    "turn_deg": 4,
+    "dz": [
+     -0.05,
+     0.0
+    ],
+    "frames_file": "d20a84024c.npy",
+    "motion": "motions/d20a84024c.json"
+   },
+   {
+    "text": "a person dances in a waltz.",
+    "en": "a person dances in a waltz.",
+    "category": "dance",
+    "checks": [
+     "moves expressively"
+    ],
+    "clip_id": 652718,
+    "dx": 0.16,
+    "turn_deg": 15,
+    "dz": [
+     -0.07,
+     0.0
+    ],
+    "frames_file": "b9c9ab2695.npy",
+    "motion": "motions/b9c9ab2695.json"
+   },
+   {
+    "text": "the person is dancing by moving both his hands around",
+    "en": "the person is dancing by moving both his hands around",
+    "category": "dance",
+    "checks": [
+     "moves expressively"
+    ],
+    "clip_id": 653937,
+    "dx": 0.09,
+    "turn_deg": 1,
+    "dz": [
+     -0.01,
+     0.0
+    ],
+    "frames_file": "6b521dcd4a.npy",
+    "motion": "motions/6b521dcd4a.json"
+   },
+   {
+    "text": "the man dances his feet in circles in front of himself.",
+    "en": "the man dances his feet in circles in front of himself.",
+    "category": "dance",
+    "checks": [
+     "moves expressively"
+    ],
+    "clip_id": 654591,
+    "dx": 1.83,
+    "turn_deg": 16,
+    "dz": [
+     -0.03,
+     0.01
+    ],
+    "frames_file": "5f1a73fe7e.npy",
+    "motion": "motions/5f1a73fe7e.json"
+   }
+  ]
+ },
+ "removed_after_review": [
+  {
+   "en": "kirsten said down and cross both legs in a squat",
+   "reason": "typo'd caption naming a person"
+  },
+  {
+   "en": "a person strats jumping and sit on knee",
+   "reason": "typo in the caption"
+  },
+  {
+   "en": "the person is jogging forward on a treadmill",
+   "reason": "a treadmill means jogging in place, but the robot travels 7 m"
+  },
+  {
+   "en": "a person reaches forward with both arms and waves them around",
+   "reason": "arms held out sideways; no forward reach, no waving"
+  }
+ ],
+ "verified_via": "live server API (exact visitor output)",
+ "excluded_categories": {
+  "wave": "hand trajectories show arms raised and lowered, never waved (review/wrists.png)",
+  "jump": "the backbone does not leave the ground for jump captions, even in English",
+  "turn_around": "the backbone walks forward instead of turning, even in English"
+ },
+ "max_per_category": 3,
+ "joint_names": [
+  "left_hip_pitch_joint",
+  "left_hip_roll_joint",
+  "left_hip_yaw_joint",
+  "left_knee_joint",
+  "left_ankle_pitch_joint",
+  "left_ankle_roll_joint",
+  "right_hip_pitch_joint",
+  "right_hip_roll_joint",
+  "right_hip_yaw_joint",
+  "right_knee_joint",
+  "right_ankle_pitch_joint",
+  "right_ankle_roll_joint",
+  "waist_yaw_joint",
+  "waist_roll_joint",
+  "waist_pitch_joint",
+  "left_shoulder_pitch_joint",
+  "left_shoulder_roll_joint",
+  "left_shoulder_yaw_joint",
+  "left_elbow_joint",
+  "left_wrist_roll_joint",
+  "left_wrist_pitch_joint",
+  "left_wrist_yaw_joint",
+  "right_shoulder_pitch_joint",
+  "right_shoulder_roll_joint",
+  "right_shoulder_yaw_joint",
+  "right_elbow_joint",
+  "right_wrist_roll_joint",
+  "right_wrist_pitch_joint",
+  "right_wrist_yaw_joint"
+ ]
+}
