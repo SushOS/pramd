@@ -162,6 +162,7 @@ ul.ex-list li:before{content:none}
 #live-status{font-size:14px;color:var(--ink3);margin-top:14px}
 #live-status[data-kind=err],#live-status[data-kind=off]{color:var(--neg)}
 #live-meta{font-size:13px;color:var(--ink2);font-family:var(--mono);margin-top:3px;min-height:1.4em}
+#live-hf{font-size:13px;color:var(--ink3);margin:8px 0 0;max-width:620px;line-height:1.55}
 iframe.demo{width:100%;height:720px;border:1px solid var(--rule);display:block;
   background:#fff;margin:24px 0 14px;border-radius:2px;
   box-shadow:0 1px 2px rgba(20,25,30,.04),0 10px 30px rgba(20,25,30,.05)}
@@ -256,6 +257,9 @@ footer p{color:var(--ink3);max-width:820px}
       </div>
       <div id="live-status">Connecting to the model…</div>
       <div id="live-meta"></div>
+      <p id="live-hf">The free GPU time is shared by everyone on a network. If generation is refused,
+        the examples above still play, or <a class="ln" href="https://huggingface.co/spaces/CodeSushh/pramd-demo"
+        target="_blank" rel="noopener">open the model on Hugging&nbsp;Face</a> to use your own allowance.</p>
     </div>
   </div>
   <script>
