@@ -1,16 +1,18 @@
-// The Kalki RP1 robot, built from the converter's own model data: a body tree for forward
-// kinematics and one convex support hull per body for shape. Those hulls are approximate volumes,
-// not the production shells -- they are what g1_to_kalki.py ships and what it uses for framing.
+// The Kalki RP1: a body tree for forward kinematics (live/kalki/model.json, from the converter's own model data)
+// with the production meshes hung on it. The meshes are live/kalki/kalki.glb: the MuJoCo model's ~1.6M triangles
+// decimated to ~270k, with their textures baked into vertex colours (tools/build_kalki_glb.py). If that file cannot be
+// loaded the figure falls back to one convex support hull per body (live/kalki/hulls.json), the coarse volumes
+// g1_to_kalki.py ships for framing.
+import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
+
 export async function loadKalki(THREE, base) {
-  const get = (name) => fetch(new URL(name, base)).then((r) => {
+  const url = (name) => new URL(name, base).href;
+  const getJson = (name) => fetch(url(name)).then((r) => {
     if (!r.ok) throw new Error(`${name}: ${r.statusText}`);
     return r.json();
   });
-  const [model, hulls] = await Promise.all([get('kalki/model.json'), get('kalki/hulls.json')]);
+  const model = await getJson('kalki/model.json');
 
-  const material = new THREE.MeshStandardMaterial({
-    color: 0xe3e5e8, roughness: 0.5, metalness: 0.05, flatShading: true, side: THREE.DoubleSide,
-  });
   const nodes = new Map();
   const root = new THREE.Group();
   const hinges = new Map();
@@ -24,15 +26,47 @@ export async function loadKalki(THREE, base) {
     if (body.joint) {
       hinges.set(body.joint, { node, axis: new THREE.Vector3(...body.axis).normalize() });
     }
-    for (const part of hulls[body.name] || []) {
-      const geometry = new THREE.BufferGeometry();
-      geometry.setAttribute('position', new THREE.Float32BufferAttribute(part.v.flat(), 3));
-      geometry.setIndex(part.f.flat());
-      geometry.computeVertexNormals();
-      const mesh = new THREE.Mesh(geometry, material);
-      mesh.castShadow = true;
-      node.add(mesh);
+  }
+
+  // Each glTF node is one visual mesh with its vertices already in its body's frame (userData.body).
+  async function addMeshes() {
+    const gltf = await new GLTFLoader().loadAsync(url('kalki/kalki.glb'));
+    let attached = 0;
+    for (const object of [...gltf.scene.children]) {
+      const parent = nodes.get(object.userData.body);
+      if (!parent) continue;
+      object.traverse((o) => { if (o.isMesh) o.castShadow = true; });
+      parent.add(object);
+      attached++;
     }
+    if (!attached) throw new Error('no mesh matched a body in the tree');
+  }
+
+  async function addHulls() {
+    const hulls = await getJson('kalki/hulls.json');
+    const material = new THREE.MeshStandardMaterial({
+      color: 0xe3e5e8, roughness: 0.5, metalness: 0.05, flatShading: true, side: THREE.DoubleSide,
+    });
+    for (const [name, parts] of Object.entries(hulls)) {
+      const node = nodes.get(name);
+      if (!node) continue;
+      for (const part of parts) {
+        const geometry = new THREE.BufferGeometry();
+        geometry.setAttribute('position', new THREE.Float32BufferAttribute(part.v.flat(), 3));
+        geometry.setIndex(part.f.flat());
+        geometry.computeVertexNormals();
+        const mesh = new THREE.Mesh(geometry, material);
+        mesh.castShadow = true;
+        node.add(mesh);
+      }
+    }
+  }
+
+  try {
+    await addMeshes();
+  } catch (e) {
+    console.warn('Kalki meshes did not load; drawing the support hulls instead.', e);
+    await addHulls();
   }
 
   const order = model.joint_order.map((name) => hinges.get(name));
