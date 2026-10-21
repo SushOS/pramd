@@ -66,6 +66,10 @@ function init() {
   let last = 0;
   let mode = 'pramd';
   let busy = false;
+  let robotKind = 'g1';        // which robot the view shows
+  let kalki = null;            // the Kalki RP1 model, loaded on first use
+  let currentExample = null;   // the example on screen, so switching robots replays it
+  let examplesData = null;     // examples.json, once loaded
 
   // ------------------------------------------------------------------ scene
   const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -132,6 +136,7 @@ function init() {
 
   const tmp = new THREE.Vector3();
   function pose(q) {
+    if (robotKind === 'kalki') { if (kalki) kalki.setPose(q); return; }
     if (!robot || !q || !jointNames) return;
     robot.position.set(q[0], q[1], q[2]);
     robot.quaternion.set(q[4], q[5], q[6], q[3]);          // qpos is wxyz
@@ -139,8 +144,9 @@ function init() {
   }
 
   function follow(snap) {
-    if (!robot) return;
-    robot.getWorldPosition(tmp);
+    const tracked = robotKind === 'kalki' ? (kalki && kalki.follow) : robot;
+    if (!tracked) return;
+    tracked.getWorldPosition(tmp);
     const goal = new THREE.Vector3(tmp.x, 0.72, tmp.z);
     const delta = goal.sub(controls.target).multiplyScalar(snap ? 1 : 0.08);
     controls.target.add(delta);
@@ -266,7 +272,7 @@ function init() {
       return;
     }
     setStatus(`Model ready on ${h.device.toUpperCase()}.`, 'ok');
-    goBtn.disabled = busy;
+    goBtn.disabled = busy || robotKind === 'kalki';
   }
 
   async function generate() {
@@ -310,7 +316,7 @@ function init() {
     } finally {
       clearInterval(timer);
       busy = false;
-      goBtn.disabled = !api;
+      goBtn.disabled = !api || robotKind === 'kalki';
     }
   }
 
@@ -331,8 +337,13 @@ function init() {
   // Clicking an example plays its verified motion straight away, with no server round trip, so the
   // examples work even while the model server is asleep. Generate still runs the model live.
   async function playPrecomputed(ex, data) {
+    currentExample = ex;
+    // On Kalki the same clip is played from its retargeted copy, converted offline by
+    // g1_to_kalki.py; the G1 file holds the model's own output.
+    const file = robotKind === 'kalki' ? ex.kalki : ex.motion;
+    if (!file) { meta.textContent = ''; return; }
     try {
-      const r = await fetch(new URL(ex.motion, import.meta.url));
+      const r = await fetch(new URL(file, import.meta.url));
       if (!r.ok) throw new Error(r.statusText);
       const m = await r.json();
       if (!jointNames && data.joint_names) jointNames = data.joint_names;
@@ -344,12 +355,73 @@ function init() {
       setFrame(0);
       follow(true);
       setPlaying(true);
-      meta.textContent = `Precomputed by this model for this example (${data.seconds} s, seed ${data.seed}). `
-        + 'Press Generate motion to run it live.';
+      meta.textContent = robotKind === 'kalki'
+        ? `The same ${data.seconds} s clip, retargeted to the Kalki RP1 (24 joints) from the G1 output.`
+        : `Precomputed by this model for this example (${data.seconds} s, seed ${data.seed}). `
+          + 'Press Generate motion to run it live.';
     } catch (_) {
       meta.textContent = '';                         // no stored motion: Generate runs it live
     }
   }
+
+  // ------------------------------------------------------------------ robot switch
+  // The G1 is what the model produces. Kalki clips are retargeted offline, so live generation
+  // only applies to the G1 -- the button says so rather than failing quietly.
+  const robotSeg = $('live-robot');
+  const robotNote = $('live-robot-note');
+
+  async function setRobot(kind) {
+    if (kind === robotKind) return;
+    robotKind = kind;
+    for (const b of robotSeg.querySelectorAll('button')) {
+      b.setAttribute('aria-pressed', String(b.dataset.robot === kind));
+    }
+    setPlaying(false);
+    if (kind === 'kalki') {
+      robotNote.textContent = 'Loading the Kalki model…';
+      try {
+        if (!kalki) {
+          const { loadKalki } = await import('./kalki.js');
+          kalki = await loadKalki(THREE, import.meta.url);
+          world.add(kalki.object);
+        }
+        kalki.object.visible = true;
+        if (robot) robot.visible = false;
+        kalki.rest();
+        robotNote.innerHTML = 'Retargeted from the G1 clips with <code>g1_to_kalki.py</code>. '
+          + 'Live generation runs on the G1.';
+        goBtn.disabled = true;
+        goBtn.title = 'Live generation plays on the Unitree G1';
+      } catch (e) {
+        robotNote.textContent = `The Kalki model did not load: ${e.message}`;
+        robotKind = 'g1';
+        for (const b of robotSeg.querySelectorAll('button')) {
+          b.setAttribute('aria-pressed', String(b.dataset.robot === 'g1'));
+        }
+        return;
+      }
+    } else {
+      if (kalki) kalki.object.visible = false;
+      if (robot) robot.visible = true;
+      robotNote.textContent = '';
+      goBtn.disabled = !api;
+      goBtn.title = '';
+      if (seedFrame) pose(seedFrame);
+    }
+    clip = null;
+    scrub.disabled = true;
+    playBtn.disabled = true;
+    scrub.value = '0';
+    clock.textContent = '0.0 / 0.0 s';
+    meta.textContent = '';
+    follow(true);
+    if (currentExample) playPrecomputed(currentExample, examplesData);   // replay on the other robot
+  }
+
+  robotSeg.addEventListener('click', (e) => {
+    const b = e.target.closest('button[data-robot]');
+    if (b) setRobot(b.dataset.robot);
+  });
 
   // Examples: held-out captions chosen by select_examples.py, one verified list per language.
   const LANGS = [['hi', 'Hindi'], ['bn', 'Bengali'], ['ta', 'Tamil'], ['te', 'Telugu'], ['en', 'English']];
@@ -359,6 +431,7 @@ function init() {
   fetch(new URL('./examples.json', import.meta.url), { cache: 'no-store' })
     .then((r) => (r.ok ? r.json() : Promise.reject(new Error(r.statusText))))
     .then((data) => {
+      examplesData = data;
       const langs = LANGS.filter(([code]) => (data.languages[code] || []).length);
       const show = (code) => {
         exTabs.querySelectorAll('button')

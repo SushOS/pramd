@@ -1,0 +1,440 @@
+{
+ "converter": "g1_to_kalki.py 1.0.0",
+ "target_model": "Kalki_RP1_medium_head90",
+ "converted": 40,
+ "failed": {},
+ "joint_order": [
+  "left_hip_pitch_joint",
+  "left_hip_roll_joint",
+  "left_hip_yaw_joint",
+  "left_knee_joint",
+  "left_ankle_pitch_joint",
+  "left_ankle_roll_joint",
+  "right_hip_pitch_joint",
+  "right_hip_roll_joint",
+  "right_hip_yaw_joint",
+  "right_knee_joint",
+  "right_ankle_pitch_joint",
+  "right_ankle_roll_joint",
+  "waist_roll_joint",
+  "waist_yaw_joint",
+  "left_shoulder_pitch_joint",
+  "left_shoulder_roll_joint",
+  "left_shoulder_yaw_joint",
+  "left_elbow_joint",
+  "left_wrist_joint",
+  "right_shoulder_pitch_joint",
+  "right_shoulder_roll_joint",
+  "right_shoulder_yaw_joint",
+  "right_elbow_joint",
+  "right_wrist_joint"
+ ],
+ "segment_error_p95_m": {
+  "min": 0.0237,
+  "median": 0.0325,
+  "max": 0.0406
+ },
+ "per_motion": {
+  "0389065c71": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.009135810599820044,
+   "segment_vector_error_p95_m": 0.025762851673294885,
+   "segment_vector_error_max_m": 0.04125285343759581,
+   "minimum_visual_floor_clearance_m": 0.0030000000000000027,
+   "max_joint_speed_rad_s": 13.690488453278343,
+   "source_to_target_root_translation_scale": 1.1952896299065572
+  },
+  "05c7e241c3": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.016345806626314876,
+   "segment_vector_error_p95_m": 0.03255593494242745,
+   "segment_vector_error_max_m": 0.04376219467020488,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 9.447893205859401,
+   "source_to_target_root_translation_scale": 1.1948792449878645
+  },
+  "124b3e8ed1": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.020782585514908365,
+   "segment_vector_error_p95_m": 0.033653168813156685,
+   "segment_vector_error_max_m": 0.045412635677514836,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 14.241920000000002,
+   "source_to_target_root_translation_scale": 1.1964117318859053
+  },
+  "16f079b9b5": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.020690185449867886,
+   "segment_vector_error_p95_m": 0.03792177169067267,
+   "segment_vector_error_max_m": 0.04464894607618525,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 2.290084108868531,
+   "source_to_target_root_translation_scale": 1.1949994641387522
+  },
+  "1b5f707ba9": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.018485756039448905,
+   "segment_vector_error_p95_m": 0.03274118363360436,
+   "segment_vector_error_max_m": 0.04363235195328537,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 13.695088382148365,
+   "source_to_target_root_translation_scale": 1.1953950441509729
+  },
+  "236d88a0fd": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.018096582230205376,
+   "segment_vector_error_p95_m": 0.03431966362795622,
+   "segment_vector_error_max_m": 0.046668300040520715,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 8.358819666179858,
+   "source_to_target_root_translation_scale": 1.194275889168989
+  },
+  "2e3712a9dc": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.012210721457571305,
+   "segment_vector_error_p95_m": 0.027620975770028963,
+   "segment_vector_error_max_m": 0.04197988014091261,
+   "minimum_visual_floor_clearance_m": 0.0029999999999999957,
+   "max_joint_speed_rad_s": 6.802310078808273,
+   "source_to_target_root_translation_scale": 1.1940796307419306
+  },
+  "2e5f1693de": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.014920995949396124,
+   "segment_vector_error_p95_m": 0.0305403487125106,
+   "segment_vector_error_max_m": 0.0358417757925863,
+   "minimum_visual_floor_clearance_m": 0.0030000000000000027,
+   "max_joint_speed_rad_s": 7.454243791594924,
+   "source_to_target_root_translation_scale": 1.1941153518988938
+  },
+  "2fc184ea8e": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.019421981049427946,
+   "segment_vector_error_p95_m": 0.040577925984397765,
+   "segment_vector_error_max_m": 0.04663963731473305,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 3.6041517624379793,
+   "source_to_target_root_translation_scale": 1.1953528121627104
+  },
+  "33bc316ab3": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.016622846500479432,
+   "segment_vector_error_p95_m": 0.03139202883188891,
+   "segment_vector_error_max_m": 0.038002633740451985,
+   "minimum_visual_floor_clearance_m": 0.0030000000000000027,
+   "max_joint_speed_rad_s": 6.497290360966178,
+   "source_to_target_root_translation_scale": 1.1940868309742105
+  },
+  "368fbd9cb8": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.013623405871949525,
+   "segment_vector_error_p95_m": 0.031718771919057524,
+   "segment_vector_error_max_m": 0.20157998906788058,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 21.886480000000002,
+   "source_to_target_root_translation_scale": 1.1942559501867134
+  },
+  "4ed538fca8": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.013966472039693582,
+   "segment_vector_error_p95_m": 0.029567031515130293,
+   "segment_vector_error_max_m": 0.05359269709334441,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 9.187009248932899,
+   "source_to_target_root_translation_scale": 1.1944050589102782
+  },
+  "5a960f580b": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.020830017620377575,
+   "segment_vector_error_p95_m": 0.03147380953250828,
+   "segment_vector_error_max_m": 0.03931585016473203,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 3.7195696800892453,
+   "source_to_target_root_translation_scale": 1.1947582204479095
+  },
+  "5e48b28c9a": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.021090140445120704,
+   "segment_vector_error_p95_m": 0.03466890909945369,
+   "segment_vector_error_max_m": 0.04330531696655721,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 13.422770520845532,
+   "source_to_target_root_translation_scale": 1.195827356149395
+  },
+  "5f1a73fe7e": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.01956163261820304,
+   "segment_vector_error_p95_m": 0.029866706891543908,
+   "segment_vector_error_max_m": 0.03647521009903906,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 5.975240528570163,
+   "source_to_target_root_translation_scale": 1.1943998335680694
+  },
+  "5f63a0b744": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.017952580442622594,
+   "segment_vector_error_p95_m": 0.0339628680141236,
+   "segment_vector_error_max_m": 0.040803906806039396,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 10.8575937109239,
+   "source_to_target_root_translation_scale": 1.1944692550678284
+  },
+  "6487700dec": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.0174029380834265,
+   "segment_vector_error_p95_m": 0.032576992631807654,
+   "segment_vector_error_max_m": 0.03984628634684725,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 9.436946543869958,
+   "source_to_target_root_translation_scale": 1.194160048982079
+  },
+  "6accf78454": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.015155992960665741,
+   "segment_vector_error_p95_m": 0.030576617497809697,
+   "segment_vector_error_max_m": 0.04044819240539265,
+   "minimum_visual_floor_clearance_m": 0.0030000000000000027,
+   "max_joint_speed_rad_s": 5.879165786703201,
+   "source_to_target_root_translation_scale": 1.1943151664489553
+  },
+  "6b521dcd4a": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.018369393586451253,
+   "segment_vector_error_p95_m": 0.03874288773778946,
+   "segment_vector_error_max_m": 0.039533575199934355,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 12.088897300122852,
+   "source_to_target_root_translation_scale": 1.1946089191862255
+  },
+  "6be97c1e32": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.016125498796650553,
+   "segment_vector_error_p95_m": 0.02871800684135619,
+   "segment_vector_error_max_m": 0.04734894266772011,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 8.29880423667223,
+   "source_to_target_root_translation_scale": 1.1946189183677172
+  },
+  "70b84931e8": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.008994246074878262,
+   "segment_vector_error_p95_m": 0.027225773197483243,
+   "segment_vector_error_max_m": 0.04409825820259379,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 10.992375204325453,
+   "source_to_target_root_translation_scale": 1.1955928253473211
+  },
+  "714577390b": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.021996645160331226,
+   "segment_vector_error_p95_m": 0.037510196475065975,
+   "segment_vector_error_max_m": 0.07380082944032446,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 14.241919999999999,
+   "source_to_target_root_translation_scale": 1.1961979802830722
+  },
+  "8079c134e9": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.009068328220355294,
+   "segment_vector_error_p95_m": 0.02622809630400172,
+   "segment_vector_error_max_m": 0.03559232182980189,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 11.325532315837638,
+   "source_to_target_root_translation_scale": 1.1950776509628476
+  },
+  "95dd43b329": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.017852121144382865,
+   "segment_vector_error_p95_m": 0.036264625950369216,
+   "segment_vector_error_max_m": 0.04407458751874273,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 10.426632969285993,
+   "source_to_target_root_translation_scale": 1.1944291599497956
+  },
+  "9692f44ba3": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.014999727452211092,
+   "segment_vector_error_p95_m": 0.03249445861344404,
+   "segment_vector_error_max_m": 0.14798681897862537,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 21.886480000000002,
+   "source_to_target_root_translation_scale": 1.1946977823296372
+  },
+  "9bbe67ff62": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.008916390849495283,
+   "segment_vector_error_p95_m": 0.023657144435150337,
+   "segment_vector_error_max_m": 0.031091747772371805,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 15.485833187970364,
+   "source_to_target_root_translation_scale": 1.1959558584272385
+  },
+  "a8fe783628": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.010961617641889698,
+   "segment_vector_error_p95_m": 0.02674798337629729,
+   "segment_vector_error_max_m": 0.03331471266596562,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 10.685515788297941,
+   "source_to_target_root_translation_scale": 1.1951666704429185
+  },
+  "ad928c45f0": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.01672471213766693,
+   "segment_vector_error_p95_m": 0.03687641654031261,
+   "segment_vector_error_max_m": 0.04825312888420712,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 14.156491899713798,
+   "source_to_target_root_translation_scale": 1.194761930819109
+  },
+  "b5f0d521fd": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.016697822158623643,
+   "segment_vector_error_p95_m": 0.031241137173093285,
+   "segment_vector_error_max_m": 0.04100134810057378,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 6.967509123652605,
+   "source_to_target_root_translation_scale": 1.1943973370631351
+  },
+  "b9c9ab2695": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.015263822740816871,
+   "segment_vector_error_p95_m": 0.027691347880171236,
+   "segment_vector_error_max_m": 0.041490159261209,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 12.069156558584497,
+   "source_to_target_root_translation_scale": 1.194906891247238
+  },
+  "bc0d09b972": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.012238411092658778,
+   "segment_vector_error_p95_m": 0.030594951341130307,
+   "segment_vector_error_max_m": 0.04571911996282527,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 14.241919999999999,
+   "source_to_target_root_translation_scale": 1.1949190855564091
+  },
+  "d1a7e43121": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.00878986729249611,
+   "segment_vector_error_p95_m": 0.028264804408294555,
+   "segment_vector_error_max_m": 0.04080339534924791,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 11.803933460847198,
+   "source_to_target_root_translation_scale": 1.195568665491105
+  },
+  "d20a84024c": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.024031820082159174,
+   "segment_vector_error_p95_m": 0.03483917223447836,
+   "segment_vector_error_max_m": 0.09263039631961216,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 14.24192,
+   "source_to_target_root_translation_scale": 1.1951596037655408
+  },
+  "d52a85e662": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.01727026683582951,
+   "segment_vector_error_p95_m": 0.034147538940535384,
+   "segment_vector_error_max_m": 0.042702584187014336,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 8.688461858963157,
+   "source_to_target_root_translation_scale": 1.194509015128988
+  },
+  "e41a2cefeb": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.022591614320764106,
+   "segment_vector_error_p95_m": 0.03657812337235007,
+   "segment_vector_error_max_m": 0.04310171736995462,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 4.588363866362898,
+   "source_to_target_root_translation_scale": 1.1948137833499557
+  },
+  "efd72ace0e": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.017758502150519197,
+   "segment_vector_error_p95_m": 0.03455358192271297,
+   "segment_vector_error_max_m": 0.042880920844780526,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 9.16053190488145,
+   "source_to_target_root_translation_scale": 1.1945590903172094
+  },
+  "f5525251b5": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.011848164468690497,
+   "segment_vector_error_p95_m": 0.027614985905602407,
+   "segment_vector_error_max_m": 0.034874938374755464,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 14.545323061839824,
+   "source_to_target_root_translation_scale": 1.2028826853717256
+  },
+  "f69cea287a": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.01711654726540237,
+   "segment_vector_error_p95_m": 0.033581800967728524,
+   "segment_vector_error_max_m": 0.04212474281121237,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 8.07907901077541,
+   "source_to_target_root_translation_scale": 1.1944893919137978
+  },
+  "f98774f0d9": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.01758481945147395,
+   "segment_vector_error_p95_m": 0.03474713008441505,
+   "segment_vector_error_max_m": 0.04407802658309741,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 7.077081421020343,
+   "source_to_target_root_translation_scale": 1.1946446530392059
+  },
+  "ff3b1882e0": {
+   "frames": 180,
+   "fps": 30.0,
+   "segment_vector_error_median_m": 0.0209841723483548,
+   "segment_vector_error_p95_m": 0.03493261320314338,
+   "segment_vector_error_max_m": 0.0389110942076124,
+   "minimum_visual_floor_clearance_m": 0.002999999999999999,
+   "max_joint_speed_rad_s": 14.241919999999999,
+   "source_to_target_root_translation_scale": 1.196492594280895
+  }
+ },
+ "note": "Kinematic pose fitting only, no balance controller. The G1 has 29 hinges and Kalki 24, so some poses are approximated. Every clip passed Kalki's joint position and speed limits."
+}

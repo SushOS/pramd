@@ -159,6 +159,8 @@ ul.ex-list li:before{content:none}
   font:inherit;font-size:15px;font-weight:600;cursor:pointer}
 #live-go:hover:not(:disabled){background:#000}
 #live-go:disabled{background:#a3a9af;cursor:not-allowed}
+.live-top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding:0 0 12px}
+#live-robot-note{font-size:13px;line-height:1.5}
 #live-status{font-size:14px;color:var(--ink3);margin-top:14px}
 #live-status[data-kind=err],#live-status[data-kind=off]{color:var(--neg)}
 #live-meta{font-size:13px;color:var(--ink2);font-family:var(--mono);margin-top:3px;min-height:1.4em}
@@ -221,9 +223,17 @@ footer p{color:var(--ink3);max-width:820px}
   <h2>Type an instruction in any of four languages</h2>
   <p>This is the frozen OMG generator with our adapter, running live. Write or paste an instruction in
   Hindi, Bengali, Tamil, Telugu or English; the motion is generated from scratch and played back on the
-  Unitree G1. Switch to stock OMG to see the same instruction without the adapter.</p>
+  Unitree G1. Switch to stock OMG to see the same instruction without the adapter, or to the Kalki RP1
+  to see the same clips on a second robot.</p>
 
   <div class="live">
+    <div class="live-top">
+      <div class="seg" id="live-robot" role="group" aria-label="Robot">
+        <button type="button" data-robot="g1" aria-pressed="true">Unitree G1</button>
+        <button type="button" data-robot="kalki" aria-pressed="false">Kalki RP1</button>
+      </div>
+      <span id="live-robot-note" class="mut"></span>
+    </div>
     <div id="live-view" aria-label="Generated motion"></div>
     <div class="live-bar">
       <button type="button" id="live-play" disabled>Play</button>

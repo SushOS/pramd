@@ -63,7 +63,8 @@
      0.0
     ],
     "frames_file": "d52a85e662.npy",
-    "motion": "motions/d52a85e662.json"
+    "motion": "motions/d52a85e662.json",
+    "kalki": "kalki/d52a85e662.json"
    },
    {
     "text": "एक आदमी धीरे-धीरे और शांति से आगे बढ़ता है।",
@@ -80,7 +81,8 @@
      0.0
     ],
     "frames_file": "5f63a0b744.npy",
-    "motion": "motions/5f63a0b744.json"
+    "motion": "motions/5f63a0b744.json",
+    "kalki": "kalki/5f63a0b744.json"
    },
    {
     "text": "एक खड़ा व्यक्ति धीरे-धीरे पीछे की ओर चलता है और रुक जाता है।",
@@ -97,7 +99,8 @@
      0.0
     ],
     "frames_file": "16f079b9b5.npy",
-    "motion": "motions/16f079b9b5.json"
+    "motion": "motions/16f079b9b5.json",
+    "kalki": "kalki/16f079b9b5.json"
    },
    {
     "text": "एक व्यक्ति आगे की ओर चौड़े कदमों से दौड़ता है।",
@@ -114,7 +117,8 @@
      0.0
     ],
     "frames_file": "70b84931e8.npy",
-    "motion": "motions/70b84931e8.json"
+    "motion": "motions/70b84931e8.json",
+    "kalki": "kalki/70b84931e8.json"
    },
    {
     "text": "एक व्यक्ति दोनों हाथ शरीर के सामने फैलाकर बैठ जाता है।",
@@ -131,7 +135,8 @@
      0.0
     ],
     "frames_file": "a8fe783628.npy",
-    "motion": "motions/a8fe783628.json"
+    "motion": "motions/a8fe783628.json",
+    "kalki": "kalki/a8fe783628.json"
    },
    {
     "text": "एक आदमी दो स्पार्टन किक मारता है, उसके बाद दो मध्यम ऊँची किक मारता है।",
@@ -148,7 +153,8 @@
      0.0
     ],
     "frames_file": "5e48b28c9a.npy",
-    "motion": "motions/5e48b28c9a.json"
+    "motion": "motions/5e48b28c9a.json",
+    "kalki": "kalki/5e48b28c9a.json"
    },
    {
     "text": "आदमी अपने पैरों को अपने सामने वृत्ताकार नृत्य करता है।",
@@ -165,7 +171,8 @@
      0.01
     ],
     "frames_file": "6be97c1e32.npy",
-    "motion": "motions/6be97c1e32.json"
+    "motion": "motions/6be97c1e32.json",
+    "kalki": "kalki/6be97c1e32.json"
    },
    {
     "text": "एक व्यक्ति वाल्ट्ज में नृत्य करता है.",
@@ -182,7 +189,8 @@
      0.02
     ],
     "frames_file": "368fbd9cb8.npy",
-    "motion": "motions/368fbd9cb8.json"
+    "motion": "motions/368fbd9cb8.json",
+    "kalki": "kalki/368fbd9cb8.json"
    }
   ],
   "bn": [
@@ -201,7 +209,8 @@
      0.0
     ],
     "frames_file": "05c7e241c3.npy",
-    "motion": "motions/05c7e241c3.json"
+    "motion": "motions/05c7e241c3.json",
+    "kalki": "kalki/05c7e241c3.json"
    },
    {
     "text": "একজন মানুষ ধীরে ধীরে এবং শান্তভাবে এগিয়ে যায়।",
@@ -218,7 +227,8 @@
      0.0
     ],
     "frames_file": "f69cea287a.npy",
-    "motion": "motions/f69cea287a.json"
+    "motion": "motions/f69cea287a.json",
+    "kalki": "kalki/f69cea287a.json"
    },
    {
     "text": "একজন ব্যক্তি কাছাকাছি সরলরেখায় এগিয়ে যাচ্ছেন",
@@ -235,7 +245,8 @@
      0.0
     ],
     "frames_file": "95dd43b329.npy",
-    "motion": "motions/95dd43b329.json"
+    "motion": "motions/95dd43b329.json",
+    "kalki": "kalki/95dd43b329.json"
    },
    {
     "text": "একজন দাঁড়ানো ব্যক্তি ধীরে ধীরে পিছনের দিকে হাঁটে তারপর থেমে যায়।",
@@ -252,7 +263,8 @@
      0.0
     ],
     "frames_file": "2fc184ea8e.npy",
-    "motion": "motions/2fc184ea8e.json"
+    "motion": "motions/2fc184ea8e.json",
+    "kalki": "kalki/2fc184ea8e.json"
    },
    {
     "text": "একজন মানুষ দুটি স্পার্টান কিক করে, তার পরে দুটি মাঝারি উচ্চ লাথি।",
@@ -269,7 +281,8 @@
      0.0
     ],
     "frames_file": "124b3e8ed1.npy",
-    "motion": "motions/124b3e8ed1.json"
+    "motion": "motions/124b3e8ed1.json",
+    "kalki": "kalki/124b3e8ed1.json"
    },
    {
     "text": "লোকটি নিজের সামনে বৃত্তে পা নাচায়।",
@@ -286,7 +299,8 @@
      0.01
     ],
     "frames_file": "236d88a0fd.npy",
-    "motion": "motions/236d88a0fd.json"
+    "motion": "motions/236d88a0fd.json",
+    "kalki": "kalki/236d88a0fd.json"
    },
    {
     "text": "একজন ব্যক্তি ওয়াল্টজে নাচছেন।",
@@ -303,7 +317,8 @@
      0.01
     ],
     "frames_file": "4ed538fca8.npy",
-    "motion": "motions/4ed538fca8.json"
+    "motion": "motions/4ed538fca8.json",
+    "kalki": "kalki/4ed538fca8.json"
    },
    {
     "text": "ব্যক্তিটি তার উভয় হাত ঘুরিয়ে নাচছে",
@@ -320,7 +335,8 @@
      0.01
     ],
     "frames_file": "ad928c45f0.npy",
-    "motion": "motions/ad928c45f0.json"
+    "motion": "motions/ad928c45f0.json",
+    "kalki": "kalki/ad928c45f0.json"
    }
   ],
   "ta": [
@@ -339,7 +355,8 @@
      0.0
     ],
     "frames_file": "b5f0d521fd.npy",
-    "motion": "motions/b5f0d521fd.json"
+    "motion": "motions/b5f0d521fd.json",
+    "kalki": "kalki/b5f0d521fd.json"
    },
    {
     "text": "ஒரு மனிதன் மெதுவாகவும் அமைதியாகவும் நடக்கிறான்.",
@@ -356,7 +373,8 @@
      0.0
     ],
     "frames_file": "6accf78454.npy",
-    "motion": "motions/6accf78454.json"
+    "motion": "motions/6accf78454.json",
+    "kalki": "kalki/6accf78454.json"
    },
    {
     "text": "நிற்கும் நபர் மெதுவாக பின்னோக்கி நடந்து சென்று நிறுத்துகிறார்.",
@@ -373,7 +391,8 @@
      0.0
     ],
     "frames_file": "e41a2cefeb.npy",
-    "motion": "motions/e41a2cefeb.json"
+    "motion": "motions/e41a2cefeb.json",
+    "kalki": "kalki/e41a2cefeb.json"
    },
    {
     "text": "மனிதன் 4 படிகள் முன்னோக்கி ஓடுகிறான்.",
@@ -391,7 +410,8 @@
      0.0
     ],
     "frames_file": "8079c134e9.npy",
-    "motion": "motions/8079c134e9.json"
+    "motion": "motions/8079c134e9.json",
+    "kalki": "kalki/8079c134e9.json"
    },
    {
     "text": "ஒரு நபர் சாதாரணமாக முன்னோக்கி ஓடுகிறார்.",
@@ -409,7 +429,8 @@
      0.0
     ],
     "frames_file": "d1a7e43121.npy",
-    "motion": "motions/d1a7e43121.json"
+    "motion": "motions/d1a7e43121.json",
+    "kalki": "kalki/d1a7e43121.json"
    },
    {
     "text": "ஒரு நபர் இரு கைகளையும் உடலின் முன் நீட்டி குந்துகிறார்.",
@@ -426,7 +447,8 @@
      0.0
     ],
     "frames_file": "f5525251b5.npy",
-    "motion": "motions/f5525251b5.json"
+    "motion": "motions/f5525251b5.json",
+    "kalki": "kalki/f5525251b5.json"
    },
    {
     "text": "ஒரு மனிதன் இரண்டு ஸ்பார்டன் உதைகளை செய்கிறான், அதைத் தொடர்ந்து இரண்டு நடுத்தர உயர் உதைகளை செய்கிறான்.",
@@ -443,7 +465,8 @@
      0.0
     ],
     "frames_file": "714577390b.npy",
-    "motion": "motions/714577390b.json"
+    "motion": "motions/714577390b.json",
+    "kalki": "kalki/714577390b.json"
    },
    {
     "text": "ஒரு நபர் நடனமாடுகிறார் மற்றும் அந்த இடத்தில் கால்களைத் திருப்புகிறார்.",
@@ -461,7 +484,8 @@
      0.01
     ],
     "frames_file": "1b5f707ba9.npy",
-    "motion": "motions/1b5f707ba9.json"
+    "motion": "motions/1b5f707ba9.json",
+    "kalki": "kalki/1b5f707ba9.json"
    }
   ],
   "te": [
@@ -480,7 +504,8 @@
      0.0
     ],
     "frames_file": "efd72ace0e.npy",
-    "motion": "motions/efd72ace0e.json"
+    "motion": "motions/efd72ace0e.json",
+    "kalki": "kalki/efd72ace0e.json"
    },
    {
     "text": "ఒక వ్యక్తి నెమ్మదిగా మరియు ప్రశాంతంగా ముందుకు నడుస్తాడు.",
@@ -497,7 +522,8 @@
      0.0
     ],
     "frames_file": "f98774f0d9.npy",
-    "motion": "motions/f98774f0d9.json"
+    "motion": "motions/f98774f0d9.json",
+    "kalki": "kalki/f98774f0d9.json"
    },
    {
     "text": "నిలబడి ఉన్న వ్యక్తి నెమ్మదిగా వెనుకకు నడుస్తూ ఆగిపోతాడు.",
@@ -514,7 +540,8 @@
      0.0
     ],
     "frames_file": "5a960f580b.npy",
-    "motion": "motions/5a960f580b.json"
+    "motion": "motions/5a960f580b.json",
+    "kalki": "kalki/5a960f580b.json"
    },
    {
     "text": "మనిషి 4 అడుగులు ముందుకు జాగ్ చేస్తాడు.",
@@ -532,7 +559,8 @@
      0.03
     ],
     "frames_file": "0389065c71.npy",
-    "motion": "motions/0389065c71.json"
+    "motion": "motions/0389065c71.json",
+    "kalki": "kalki/0389065c71.json"
    },
    {
     "text": "ఒక వ్యక్తి సాధారణంగా ముందుకు జాగ్ చేస్తాడు.",
@@ -550,7 +578,8 @@
      0.01
     ],
     "frames_file": "bc0d09b972.npy",
-    "motion": "motions/bc0d09b972.json"
+    "motion": "motions/bc0d09b972.json",
+    "kalki": "kalki/bc0d09b972.json"
    },
    {
     "text": "ఒక వ్యక్తి శరీరం ముందు రెండు చేతులను చాచి చతికిలబడ్డాడు.",
@@ -567,7 +596,8 @@
      0.0
     ],
     "frames_file": "9bbe67ff62.npy",
-    "motion": "motions/9bbe67ff62.json"
+    "motion": "motions/9bbe67ff62.json",
+    "kalki": "kalki/9bbe67ff62.json"
    },
    {
     "text": "ఒక వ్యక్తి రెండు స్పార్టన్ కిక్‌లు చేస్తాడు, తర్వాత రెండు మీడియం హై కిక్‌లు వేస్తాడు.",
@@ -584,7 +614,8 @@
      0.01
     ],
     "frames_file": "ff3b1882e0.npy",
-    "motion": "motions/ff3b1882e0.json"
+    "motion": "motions/ff3b1882e0.json",
+    "kalki": "kalki/ff3b1882e0.json"
    },
    {
     "text": "ఒక వ్యక్తి వాల్ట్జ్‌లో నృత్యం చేస్తాడు.",
@@ -601,7 +632,8 @@
      0.01
     ],
     "frames_file": "9692f44ba3.npy",
-    "motion": "motions/9692f44ba3.json"
+    "motion": "motions/9692f44ba3.json",
+    "kalki": "kalki/9692f44ba3.json"
    }
   ],
   "en": [
@@ -620,7 +652,8 @@
      0.01
     ],
     "frames_file": "6487700dec.npy",
-    "motion": "motions/6487700dec.json"
+    "motion": "motions/6487700dec.json",
+    "kalki": "kalki/6487700dec.json"
    },
    {
     "text": "a man walks forward slowly and calmly.",
@@ -637,7 +670,8 @@
      0.01
     ],
     "frames_file": "33bc316ab3.npy",
-    "motion": "motions/33bc316ab3.json"
+    "motion": "motions/33bc316ab3.json",
+    "kalki": "kalki/33bc316ab3.json"
    },
    {
     "text": "a person casually walks forward and then stops dramatically.",
@@ -654,7 +688,8 @@
      0.01
     ],
     "frames_file": "2e5f1693de.npy",
-    "motion": "motions/2e5f1693de.json"
+    "motion": "motions/2e5f1693de.json",
+    "kalki": "kalki/2e5f1693de.json"
    },
    {
     "text": "figure walks in a semi-circle, and sits down on the floor",
@@ -671,7 +706,8 @@
      0.0
     ],
     "frames_file": "2e3712a9dc.npy",
-    "motion": "motions/2e3712a9dc.json"
+    "motion": "motions/2e3712a9dc.json",
+    "kalki": "kalki/2e3712a9dc.json"
    },
    {
     "text": "a man makes two spartan kicks, followed by two medium high kicks.",
@@ -688,7 +724,8 @@
      0.0
     ],
     "frames_file": "d20a84024c.npy",
-    "motion": "motions/d20a84024c.json"
+    "motion": "motions/d20a84024c.json",
+    "kalki": "kalki/d20a84024c.json"
    },
    {
     "text": "a person dances in a waltz.",
@@ -705,7 +742,8 @@
      0.0
     ],
     "frames_file": "b9c9ab2695.npy",
-    "motion": "motions/b9c9ab2695.json"
+    "motion": "motions/b9c9ab2695.json",
+    "kalki": "kalki/b9c9ab2695.json"
    },
    {
     "text": "the person is dancing by moving both his hands around",
@@ -722,7 +760,8 @@
      0.0
     ],
     "frames_file": "6b521dcd4a.npy",
-    "motion": "motions/6b521dcd4a.json"
+    "motion": "motions/6b521dcd4a.json",
+    "kalki": "kalki/6b521dcd4a.json"
    },
    {
     "text": "the man dances his feet in circles in front of himself.",
@@ -739,7 +778,8 @@
      0.01
     ],
     "frames_file": "5f1a73fe7e.npy",
-    "motion": "motions/5f1a73fe7e.json"
+    "motion": "motions/5f1a73fe7e.json",
+    "kalki": "kalki/5f1a73fe7e.json"
    }
   ]
  },
@@ -798,5 +838,16 @@
   "right_wrist_roll_joint",
   "right_wrist_pitch_joint",
   "right_wrist_yaw_joint"
- ]
+ ],
+ "kalki": {
+  "target_model": "Kalki_RP1_medium_head90",
+  "converter": "g1_to_kalki.py 1.0.0",
+  "joints": 24,
+  "segment_error_p95_m": {
+   "min": 0.0237,
+   "median": 0.0325,
+   "max": 0.0406
+  },
+  "note": "Kinematic pose fitting only, no balance controller. The G1 has 29 hinges and Kalki 24, so some poses are approximated. Every clip passed Kalki's joint position and speed limits."
+ }
 }
